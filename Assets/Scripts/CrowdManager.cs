@@ -4,15 +4,40 @@ using UnityEngine;
 
 public class CrowdManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private AudioSource jokeAudioSource;
+    [SerializeField] private AudioClip cheeringClip;
+    [SerializeField] private AudioClip booingClip;
+
+    public void CrowdResponse(JokeQuality jokeQuality)
     {
-        
+        switch (jokeQuality)
+        {
+            case JokeQuality.GoodJoke:
+                GoodJokeResponse();
+                break;
+            case JokeQuality.BadJoke:
+                BadJokeResponse();
+                break;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void GoodJokeResponse()
     {
-        
+        if(jokeAudioSource.isPlaying)
+        {
+            jokeAudioSource.Stop();
+        }
+
+        jokeAudioSource.clip = cheeringClip;
+        jokeAudioSource.Play();
+    }
+    private void BadJokeResponse()
+    {
+        if (jokeAudioSource.isPlaying)
+        {
+            jokeAudioSource.Stop();
+        }
+        jokeAudioSource.clip = booingClip;
+        jokeAudioSource.Play();
     }
 }

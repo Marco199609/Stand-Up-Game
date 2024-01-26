@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public JokeData jokeSelected {  get; private set; }
-
     private Camera cam;
     private RaycastHit hit;
 
@@ -14,6 +12,9 @@ public class PlayerController : MonoBehaviour
 
     public delegate void JokeUnvisualized();
     public static event JokeUnvisualized OnJokeUnvisualized;
+
+    public delegate void JokeSelected(JokeData joke);
+    public static event JokeSelected OnJokeSelected;
 
     private void Awake()
     {
@@ -56,12 +57,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            jokeSelected = jokeData;
-        }
-
-        if(Input.GetMouseButtonDown(1))
-        {
-            jokeSelected = null;
+            OnJokeSelected(jokeData);
         }
     }
 }
