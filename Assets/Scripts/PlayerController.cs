@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public JokeData jokeSelected {  get; private set; }
+
     private Camera cam;
     private RaycastHit hit;
 
-    public delegate void JokeSelected(string joke, JokeQuality jokeQuality);
-    public static event JokeSelected OnJokeSelected;
+    public delegate void JokeVisualized(string joke, JokeQuality jokeQuality);
+    public static event JokeVisualized OnJokeVisualized;
+
+    public delegate void JokeUnvisualized();
+    public static event JokeUnvisualized OnJokeUnvisualized;
+
     private void Awake()
     {
         cam = Camera.main;
@@ -35,8 +41,27 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out JokeData jokeData))
             {
-                OnJokeSelected(jokeData.Joke, jokeData.JokeQuality);
+                SelectJoke(jokeData);
             }
+            else
+            {
+                OnJokeUnvisualized();
+            }
+        }
+    }
+
+    private void SelectJoke(JokeData jokeData)
+    {
+        OnJokeVisualized(jokeData.Joke, jokeData.JokeQuality);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            jokeSelected = jokeData;
+        }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            jokeSelected = null;
         }
     }
 }

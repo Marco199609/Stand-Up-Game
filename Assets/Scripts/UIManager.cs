@@ -9,13 +9,15 @@ public class UIManager : MonoBehaviour
     void OnEnable()
     {
         GameController.OnCountdown += ShowCountdownUI;
-        PlayerController.OnJokeSelected += ShowJokeUI;
+        PlayerController.OnJokeVisualized += ShowJokeUI;
+        PlayerController.OnJokeUnvisualized += CleanJokeUI;
     }
 
     void OnDisable()
     {
         GameController.OnCountdown -= ShowCountdownUI;
-        PlayerController.OnJokeSelected -= ShowJokeUI;
+        PlayerController.OnJokeVisualized -= ShowJokeUI;
+        PlayerController.OnJokeUnvisualized -= CleanJokeUI;
     }
 
     private void ShowCountdownUI(int timeRemaining)
@@ -26,5 +28,10 @@ public class UIManager : MonoBehaviour
     private void ShowJokeUI(string joke, JokeQuality jokeQuality)
     {
         jokeText.text = joke;
+    }
+
+    private void CleanJokeUI()
+    {
+        jokeText.text = string.Empty;
     }
 }
