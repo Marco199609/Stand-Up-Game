@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JokeManager : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] jokePages;
-    
     // Start is called before the first frame update
     void Start()
     {
