@@ -15,8 +15,8 @@ public class UIManager : MonoBehaviour
         GameController.OnCountdown -= ShowCountdownUI;
     }
 
-    private void ShowCountdownUI()
+    private void ShowCountdownUI(int timeRemaining)
     {
-        timerText.text = GameController.Instance.GetTurnTimeLeft().ToString();
+        timerText.text = timeRemaining.ToString();
     }
 }

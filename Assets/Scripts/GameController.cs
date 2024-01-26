@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private float turnDurationInSeconds = 180;
+    [SerializeField] private int turnDurationInSeconds = 180;
     [SerializeField] private float jokeResponseDelayInSeconds = 2;
     [SerializeField] private int reputationLevel = 100;
 
     public static GameController Instance;
 
-    public delegate void TimeCountdown();
+    public delegate void TimeCountdown(int timeRemaining);
     public static event TimeCountdown OnCountdown;
 
     void Start()
@@ -33,24 +33,24 @@ public class GameController : MonoBehaviour
 
     IEnumerator CountDownTurnDuration()
     {
-        OnCountdown();
+        OnCountdown(turnDurationInSeconds);
 
         while(turnDurationInSeconds > 0)
         {
             yield return new WaitForSecondsRealtime(1);
             turnDurationInSeconds--;
-            OnCountdown();
+            OnCountdown(turnDurationInSeconds);
         }
 
         yield return null;
     }
 
-    public void AddSecondsToTurn(float seconds)
+    public void AddSecondsToTurn(int seconds)
     {
         turnDurationInSeconds += seconds;
     }
 
-    public void SubtractSecondsToTurn(float seconds)
+    public void SubtractSecondsToTurn(int seconds)
     {
         turnDurationInSeconds -= seconds;
     }
