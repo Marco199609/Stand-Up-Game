@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private float turnDurationInSeconds = 180;
+    [SerializeField] private float jokeResponseDelayInSeconds = 2;
     [SerializeField] private int reputationLevel = 100;
 
     void Start()
@@ -36,6 +37,11 @@ public class GameController : MonoBehaviour
     public float GetTurnTimeLeft()
     {
         return turnDurationInSeconds;
+    }
+
+    public float GetJokeResponseDelay()
+    {
+        return jokeResponseDelayInSeconds;
     }
 
     public int GetReputationLevel()
