@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     void OnEnable()
     {
         GameController.OnCountdown += ShowCountdownUI;
+        GameController.OnModifyReputationLevel += ReputationLevelUI;
         JokeManager.OnTellJokeColliderVisualized += ActivateTellJokeUI;
         JokeManager.OnTellJokeColliderUnvisualized += DeactivateTellJokeUI;
         PlayerController.OnJokeVisualized += ShowJokeUI;
@@ -22,6 +23,7 @@ public class UIManager : MonoBehaviour
     void OnDisable()
     {
         GameController.OnCountdown -= ShowCountdownUI;
+        GameController.OnModifyReputationLevel -= ReputationLevelUI;
         JokeManager.OnTellJokeColliderVisualized -= ActivateTellJokeUI;
         JokeManager.OnTellJokeColliderUnvisualized -= DeactivateTellJokeUI;
         PlayerController.OnJokeVisualized -= ShowJokeUI;
@@ -43,15 +45,20 @@ public class UIManager : MonoBehaviour
         jokeText.text = string.Empty;
     }
 
-    public void ActivateTellJokeUI()
+    private void ActivateTellJokeUI()
     {
         tellJokeToCrowdUI.SetActive(true);
         uiCenterPoint.SetActive(false);
     }
 
-    public void DeactivateTellJokeUI()
+    private void DeactivateTellJokeUI()
     {
         tellJokeToCrowdUI.SetActive(false);
         uiCenterPoint.SetActive(true);
+    }
+
+    private void ReputationLevelUI()
+    {
+        reputationLevelImage.fillAmount = (float) GameController.Instance.GetReputationLevel() / 100;
     }
 }

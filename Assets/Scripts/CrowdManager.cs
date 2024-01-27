@@ -31,6 +31,8 @@ public class CrowdManager : MonoBehaviour
 
         jokeAudioSource.clip = cheeringClip;
         jokeAudioSource.Play();
+
+        GameController.Instance.AddReputationLevel(10);
     }
     private void BadJokeResponse()
     {
@@ -40,5 +42,7 @@ public class CrowdManager : MonoBehaviour
         }
         jokeAudioSource.clip = booingClip;
         jokeAudioSource.Play();
+        
+        GameController.Instance.SubtractReputationLevel(10);
     }
 }
