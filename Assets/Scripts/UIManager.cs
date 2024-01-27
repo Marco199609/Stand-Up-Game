@@ -9,11 +9,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject tellJokeToCrowdUI;
     [SerializeField] private GameObject uiCenterPoint;
     [SerializeField] private Image reputationLevelImage;
+    [SerializeField] private GameObject uiContainer;
+    [SerializeField] private GameObject gameOverUI;
 
     void OnEnable()
     {
         GameController.OnCountdown += ShowCountdownUI;
         GameController.OnModifyReputationLevel += ReputationLevelUI;
+        GameController.OnGameOver += GameOverUI;
         JokeManager.OnTellJokeColliderVisualized += ActivateTellJokeUI;
         JokeManager.OnTellJokeColliderUnvisualized += DeactivateTellJokeUI;
         PlayerController.OnJokeVisualized += ShowJokeUI;
@@ -24,6 +27,7 @@ public class UIManager : MonoBehaviour
     {
         GameController.OnCountdown -= ShowCountdownUI;
         GameController.OnModifyReputationLevel -= ReputationLevelUI;
+        GameController.OnGameOver -= GameOverUI;
         JokeManager.OnTellJokeColliderVisualized -= ActivateTellJokeUI;
         JokeManager.OnTellJokeColliderUnvisualized -= DeactivateTellJokeUI;
         PlayerController.OnJokeVisualized -= ShowJokeUI;
@@ -60,5 +64,11 @@ public class UIManager : MonoBehaviour
     private void ReputationLevelUI()
     {
         reputationLevelImage.fillAmount = (float) GameController.Instance.GetReputationLevel() / 100;
+    }
+
+    private void GameOverUI()
+    {
+        uiContainer.SetActive(false);
+        gameOverUI.SetActive(true);
     }
 }

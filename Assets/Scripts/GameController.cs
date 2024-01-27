@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour
     public delegate void ModifyReputationLevel();
     public static event ModifyReputationLevel OnModifyReputationLevel;
 
+    public delegate void GameOver();
+    public static event GameOver OnGameOver;
+
     void Start()
     {
         if(Instance == null)
@@ -34,6 +37,15 @@ public class GameController : MonoBehaviour
         StartCoroutine(CountDownTurnDuration());
 
         OnModifyReputationLevel();
+    }
+
+    private void Update()
+    {
+        if(reputationLevel <= 0)
+        {
+            OnGameOver();
+            Time.timeScale = 0;
+        }
     }
 
     IEnumerator CountDownTurnDuration()
@@ -63,12 +75,14 @@ public class GameController : MonoBehaviour
     public void AddReputationLevel(int amount)
     {
         reputationLevel += amount;
+        reputationLevel = Mathf.Clamp(reputationLevel, 0, 100);
         OnModifyReputationLevel();
     }
 
         public void SubtractReputationLevel(int amount)
     {
         reputationLevel -= amount;
+        reputationLevel = Mathf.Clamp(reputationLevel, 0, 100);
         OnModifyReputationLevel();
     }
 
