@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private int turnDurationInSeconds = 180;
+    [SerializeField] private int turnDurationInSeconds = 90;
     [SerializeField] private float jokeResponseDelayInSeconds = 2;
     [SerializeField] private int reputationLevel = 100;
 

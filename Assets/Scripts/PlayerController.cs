@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Collider currentVisualizedObject { get; private set; }
+
     private Camera cam;
     private RaycastHit hit;
 
@@ -16,18 +16,22 @@ public class PlayerController : MonoBehaviour
     public delegate void JokeSelected(JokeData joke);
     public static event JokeSelected OnJokeSelected;
 
+    public static PlayerController Instance;
+
     private void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         cam = Camera.main;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         PlayerRaycast();
@@ -40,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
         if(Physics.Raycast(ray, out hit))
         {
+            currentVisualizedObject = hit.collider;
             if (hit.collider.TryGetComponent(out JokeData jokeData))
             {
                 SelectJoke(jokeData);

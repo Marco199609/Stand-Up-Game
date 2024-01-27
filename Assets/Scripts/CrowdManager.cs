@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CrowdManager : MonoBehaviour
@@ -10,15 +8,18 @@ public class CrowdManager : MonoBehaviour
 
     public void CrowdResponse(JokeQuality jokeQuality)
     {
-        switch (jokeQuality)
+        if(!JokeManager.Instance.isVisualizingJokeSheet)
         {
-            case JokeQuality.GoodJoke:
-                GoodJokeResponse();
-                break;
-            case JokeQuality.BadJoke:
-                BadJokeResponse();
-                break;
-        }
+            switch (jokeQuality)
+            {
+                case JokeQuality.GoodJoke:
+                    GoodJokeResponse();
+                    break;
+                case JokeQuality.BadJoke:
+                    BadJokeResponse();
+                    break;
+            }
+        }   
     }
 
     private void GoodJokeResponse()
