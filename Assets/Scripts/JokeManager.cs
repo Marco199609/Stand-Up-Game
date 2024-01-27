@@ -1,8 +1,12 @@
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
+using Unity.VisualScripting;
+using System.Linq;
 
 public class JokeManager : MonoBehaviour
 {
+    [SerializeField] private List<JokeDataTest> jokeList;
     [SerializeField] private GameObject[] jokePages;
     [SerializeField] private JokeData jokeSelected;
 
@@ -28,6 +32,17 @@ public class JokeManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+
+    }
+
+    private void Start()
+    {
+        var json = Resources.Load("Jokes");
+        var output = json.ToString();
+        var listObject = JsonUtility.FromJson<JokeDataListObject>(output);
+
+        jokeList = listObject.jokedatas;
     }
 
 
@@ -59,7 +74,7 @@ public class JokeManager : MonoBehaviour
 
                 if(Input.GetMouseButtonDown(0))
                 {
-                    crowdManager.CrowdResponse(jokeSelected.JokeQuality);
+                    crowdManager.CrowdResponse(jokeSelected.jokequality);
                     jokeSelected = null;
                 }
             }

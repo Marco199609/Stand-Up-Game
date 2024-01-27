@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
     private void SelectJoke(JokeData jokeData)
     {
-        OnJokeVisualized(jokeData.Joke, jokeData.JokeQuality);
+        OnJokeVisualized(jokeData.joke, jokeData.jokequality);
 
         if (Input.GetMouseButtonDown(0))
         {
