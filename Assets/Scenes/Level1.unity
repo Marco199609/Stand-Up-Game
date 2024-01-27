@@ -1456,9 +1456,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0f829b58440a134851f604fa62b047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnDurationInSeconds: 180
+  turnDurationInSeconds: 90
   jokeResponseDelayInSeconds: 2
   reputationLevel: 50
+  bonusDuration: 15
 --- !u!1 &885090048
 GameObject:
   m_ObjectHideFlags: 0

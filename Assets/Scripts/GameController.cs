@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private int turnDurationInSeconds = 90;
     [SerializeField] private float jokeResponseDelayInSeconds = 2;
     [SerializeField] private int reputationLevel = 50;
+    [SerializeField] private int bonusDuration = 15;
 
     public static GameController Instance;
 
@@ -76,6 +77,13 @@ public class GameController : MonoBehaviour
     {
         reputationLevel += amount;
         reputationLevel = Mathf.Clamp(reputationLevel, 0, 100);
+
+        if(reputationLevel >= 100)
+        {
+            turnDurationInSeconds += bonusDuration;
+            reputationLevel = 50;
+        }
+
         OnModifyReputationLevel();
     }
 

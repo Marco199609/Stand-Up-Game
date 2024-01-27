@@ -49,24 +49,24 @@ public class JokeManager : MonoBehaviour
     {
         if(PlayerController.Instance.currentVisualizedObject == TellJokeToCrowdCollider)
         {
-            OnTellJokeColliderVisualized();
+            if(jokeSelected == null)
+            {
+                OnTellJokeColliderUnvisualized();
+            }
+            else
+            {
+                OnTellJokeColliderVisualized();
+
+                if(Input.GetMouseButtonDown(0))
+                {
+                    crowdManager.CrowdResponse(jokeSelected.JokeQuality);
+                    jokeSelected = null;
+                }
+            }
         }
         else
         {
             OnTellJokeColliderUnvisualized();
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            jokeSelected = null;
-        }
-
-        if(Input.GetMouseButtonDown(0))
-        {
-            if(jokeSelected != null)
-            {
-                crowdManager.CrowdResponse(jokeSelected.JokeQuality);
-            }
         }
     }
 
