@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CrowdManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class CrowdManager : MonoBehaviour
     [SerializeField] private AudioSource jokeAudioSource;
     [SerializeField] private AudioClip cheeringClip;
     [SerializeField] private AudioClip booingClip;
+    [SerializeField] private List<Animator> characterAnimators;
 
     private int reactionTick = 3;
 
@@ -47,6 +49,11 @@ public class CrowdManager : MonoBehaviour
 
     private void GoodJokeResponse()
     {
+        foreach(Animator animator in characterAnimators)
+        {
+            animator.SetTrigger("sitting_clap");
+        }
+
         if(jokeAudioSource.isPlaying)
         {
             jokeAudioSource.Stop();

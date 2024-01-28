@@ -96,7 +96,10 @@ public class UIManager : MonoBehaviour
 
     private void ActivateCenterPoint()
     {
-        uiCenterPoint.SetActive(true);
+        if(crowdReactionTimerText.text.Equals(""))
+        {
+            uiCenterPoint.SetActive(true);
+        }
     }
 
     private void DeactivateCenterPoint(JokePage jokePage)
@@ -138,10 +141,12 @@ public class UIManager : MonoBehaviour
         if(tick > 0)
         {
             crowdReactionTimerText.text = tick.ToString();
+            DeactivateCenterPoint();
         }
         else
         {
             crowdReactionTimerText.text = "";
+            ActivateCenterPoint();
         }
     }
 

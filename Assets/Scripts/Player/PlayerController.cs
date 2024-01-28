@@ -17,11 +17,15 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         JokeManager.OnDeselectJokePage += ResetVirtualCam;
+        CrowdManager.OnCrowdReactionTick += FreezePlayer;
+        CrowdManager.OnCrowdReactionTick += ResetVirtualCam;
     }
 
     private void OnDisable()
     {
         JokeManager.OnDeselectJokePage -= ResetVirtualCam;
+        CrowdManager.OnCrowdReactionTick -= FreezePlayer;
+        CrowdManager.OnCrowdReactionTick += ResetVirtualCam;
     }
 
 #endregion
@@ -76,17 +80,38 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            FreezePlayer();
+
+            OnJokePageSelected(jokePage);
+        }
+    }
+
+    private void FreezePlayer(int tick = 1)
+    {
+        if(tick > 0)
+        {
             var pov = virtualCam.GetCinemachineComponent<CinemachinePOV>();
             pov.m_HorizontalAxis.m_MaxSpeed = 0;
             pov.m_VerticalAxis.m_MaxSpeed = 0;
 
             pov.m_HorizontalAxis.m_DecelTime = 0;
             pov.m_VerticalAxis.m_DecelTime = 0;
-
-            OnJokePageSelected(jokePage);
         }
+
     }
 
+    private void ResetVirtualCam(int tick = 0)
+    {
+        if(tick == 0)
+        {
+            var pov = virtualCam.GetCinemachineComponent<CinemachinePOV>();
+            pov.m_HorizontalAxis.m_MaxSpeed = defaultPOVSpeed;
+            pov.m_VerticalAxis.m_MaxSpeed = defaultPOVSpeed;
+
+            pov.m_HorizontalAxis.m_DecelTime = defaultPOVDecelTime;
+            pov.m_VerticalAxis.m_DecelTime = defaultPOVDecelTime;
+        }
+    }
     private void ResetVirtualCam()
     {
         var pov = virtualCam.GetCinemachineComponent<CinemachinePOV>();
