@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
         JokeManager.OnJokePageSelected += ClearJokeUI;
         JokeManager.OnDeselectJokePage += DectivatePagePrompts;
         JokeManager.OnJokePageSelected += ActivatePagePrompts;
+        CrowdManager.OnCrowdReactionTick += ReactionTickUI;
     }
 
     void OnDisable()
@@ -39,6 +40,7 @@ public class UIManager : MonoBehaviour
         JokeManager.OnJokePageSelected -= ClearJokeUI;
         JokeManager.OnDeselectJokePage -= DectivatePagePrompts;
         JokeManager.OnJokePageSelected -= ActivatePagePrompts;
+        CrowdManager.OnCrowdReactionTick -= ReactionTickUI;
     }
 
     #endregion
@@ -53,11 +55,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject uiContainer;
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject pagePrompts;
+    [SerializeField] private TextMeshProUGUI crowdReactionTimerText;
 
     private void Awake()
     {
         ClearJokeUI();
         stopWatchFill.fillAmount = 0;
+        crowdReactionTimerText.text = "";
     }
 
     private void ShowCountdownUI(int timeRemaining)
@@ -126,6 +130,18 @@ public class UIManager : MonoBehaviour
         else
         {
             reputationLevelImage.sprite = reputationStateSprites[0];
+        }
+    }
+
+    private void ReactionTickUI(int tick)
+    {
+        if(tick > 0)
+        {
+            crowdReactionTimerText.text = tick.ToString();
+        }
+        else
+        {
+            crowdReactionTimerText.text = "";
         }
     }
 

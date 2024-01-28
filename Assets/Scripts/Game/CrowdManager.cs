@@ -1,15 +1,39 @@
+using System.Collections;
 using UnityEngine;
 
 public class CrowdManager : MonoBehaviour
 {
+    public delegate void CrowdReactionTick(int tick);
+    public static event CrowdReactionTick OnCrowdReactionTick;
+
+
     [SerializeField] private AudioSource jokeAudioSource;
     [SerializeField] private AudioClip cheeringClip;
     [SerializeField] private AudioClip booingClip;
+
+    private int reactionTick = 3;
 
     public void CrowdResponse(JokeQuality jokeQuality)
     {
         if(!JokeManager.Instance.isVisualizingJokeSheet)
         {
+            StartCoroutine(CrowdReactionDelay(jokeQuality));
+        }   
+    }
+
+    IEnumerator CrowdReactionDelay(JokeQuality jokeQuality)
+    {
+        while (reactionTick > 0)
+        {
+            OnCrowdReactionTick(reactionTick);
+            yield return new WaitForSecondsRealtime(1);
+            reactionTick--;
+        }
+
+        OnCrowdReactionTick(reactionTick);
+
+        reactionTick = 3;
+
             switch (jokeQuality)
             {
                 case JokeQuality.GoodJoke:
@@ -19,7 +43,6 @@ public class CrowdManager : MonoBehaviour
                     BadJokeResponse();
                     break;
             }
-        }   
     }
 
     private void GoodJokeResponse()
