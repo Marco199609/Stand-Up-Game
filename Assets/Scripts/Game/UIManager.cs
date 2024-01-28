@@ -43,11 +43,13 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private Image stopWatchFill;
     [SerializeField] private TextMeshProUGUI jokeText;
     [SerializeField] private GameObject tellJokeToCrowdUI;
     [SerializeField] private GameObject uiCenterPoint;
     [SerializeField] private Image reputationLevelImage;
+    [SerializeField] private Sprite[] reputationStateSprites;
+    [SerializeField] private Image reputationLevelFill;
     [SerializeField] private GameObject uiContainer;
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject pagePrompts;
@@ -55,11 +57,12 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         ClearJokeUI();
+        stopWatchFill.fillAmount = 0;
     }
 
     private void ShowCountdownUI(int timeRemaining)
     {
-        timerText.text = timeRemaining.ToString();
+        stopWatchFill.fillAmount = 1 - ((float) timeRemaining / 90);
     }
 
     private void ShowJokeUI(string joke)
@@ -104,7 +107,26 @@ public class UIManager : MonoBehaviour
 
     private void ReputationLevelUI()
     {
-        reputationLevelImage.fillAmount = (float) GameController.Instance.GetReputationLevel() / 100;
+        reputationLevelFill.fillAmount = (float) GameController.Instance.GetReputationLevel() / 100;
+
+        int currentReputation = GameController.Instance.GetReputationLevel();
+
+        if(currentReputation > 80)
+        {
+            reputationLevelImage.sprite = reputationStateSprites[3];
+        }
+        else if(currentReputation > 65)
+        {
+            reputationLevelImage.sprite = reputationStateSprites[2];
+        }
+        else if(currentReputation > 50)
+        {
+            reputationLevelImage.sprite = reputationStateSprites[1];
+        }
+        else
+        {
+            reputationLevelImage.sprite = reputationStateSprites[0];
+        }
     }
 
     private void ActivatePagePrompts(JokePage page)
