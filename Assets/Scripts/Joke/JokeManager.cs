@@ -1,13 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
-using Unity.VisualScripting;
-using System.Linq;
 
 public class JokeManager : MonoBehaviour
 {
-    [SerializeField] private List<JokeDataTest> jokeList;
-    [SerializeField] private GameObject[] jokePages;
+    [SerializeField] private TextAsset json;
+    [SerializeField] private JokeListObject jokeList;
+    [SerializeField] private JokePage[] jokePages;
     [SerializeField] private JokeData jokeSelected;
 
     [SerializeField] private Collider TellJokeToCrowdCollider;
@@ -32,17 +30,13 @@ public class JokeManager : MonoBehaviour
         {
             Destroy(this);
         }
-
-
     }
 
     private void Start()
     {
-        var json = Resources.Load("Jokes");
-        var output = json.ToString();
-        var listObject = JsonUtility.FromJson<JokeDataListObject>(output);
+        jokeList = JsonConvert.DeserializeObject<JokeListObject>(json.text);
 
-        jokeList = listObject.jokedatas;
+        ShuffleJokes();
     }
 
 
@@ -74,7 +68,8 @@ public class JokeManager : MonoBehaviour
 
                 if(Input.GetMouseButtonDown(0))
                 {
-                    crowdManager.CrowdResponse(jokeSelected.jokequality);
+                    crowdManager.CrowdResponse(jokeSelected.JokeQuality);
+                    ShuffleJokes();
                     jokeSelected = null;
                 }
             }
@@ -82,6 +77,22 @@ public class JokeManager : MonoBehaviour
         else
         {
             OnTellJokeColliderUnvisualized();
+        }
+    }
+
+    private void ShuffleJokes()
+    {
+        foreach(JokePage jokePage in jokePages)
+        {
+            var i = Random.Range(0, jokeList.JokeList.Count - 1);
+
+            var jokeContainer = jokeList.JokeList[i];
+            
+            jokePage.pageText.text = jokeContainer.joke;
+            jokePage.jokeData.Joke = jokeContainer.joke;
+            jokePage.jokeData.JokeQuality = jokeContainer.JokeQuality;
+
+            //jokeList.JokeList.Remove(jokeContainer);
         }
     }
 

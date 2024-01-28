@@ -1,0 +1,34 @@
+{
+    "joke_list": [
+        {
+            "joke": "A blind man walks into a bar. And a table. And a chair. ",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What's orange and sounds like a parrot? A carrot.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "Velcro. What a ripoff.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What do you call a black guy flying a plane? A pilot, you fucking racist.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "The bartender says, \"We don't serve time travelers here.\" A time traveler walks into a bar.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What do you call an alligator in a vest? An Investigator.",
+            "joke_quality": 0
+        }
+        ,
+        {
+            "joke": "What's the difference between swine flu and bird flu? Bird flu requires tweetment, and swine flu requires oinkment!",
+            "joke_quality": 1
+        }
+    ]
+}
+
