@@ -5,14 +5,6 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     #region Events
-    [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private TextMeshProUGUI jokeText;
-    [SerializeField] private GameObject tellJokeToCrowdUI;
-    [SerializeField] private GameObject uiCenterPoint;
-    [SerializeField] private Image reputationLevelImage;
-    [SerializeField] private GameObject uiContainer;
-    [SerializeField] private GameObject gameOverUI;
-
     void OnEnable()
     {
         GameController.OnCountdown += ShowCountdownUI;
@@ -27,6 +19,8 @@ public class UIManager : MonoBehaviour
         JokeManager.OnTellJokeColliderVisualized += DeactivateCenterPoint;
         JokeManager.OnTellJokeColliderUnvisualized += ActivateCenterPoint;
         JokeManager.OnJokePageSelected += ClearJokeUI;
+        JokeManager.OnDeselectJokePage += DectivatePagePrompts;
+        JokeManager.OnJokePageSelected += ActivatePagePrompts;
     }
 
     void OnDisable()
@@ -43,9 +37,20 @@ public class UIManager : MonoBehaviour
         JokeManager.OnTellJokeColliderVisualized -= DeactivateCenterPoint;
         JokeManager.OnTellJokeColliderUnvisualized -= ActivateCenterPoint;
         JokeManager.OnJokePageSelected -= ClearJokeUI;
+        JokeManager.OnDeselectJokePage -= DectivatePagePrompts;
+        JokeManager.OnJokePageSelected -= ActivatePagePrompts;
     }
 
     #endregion
+
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI jokeText;
+    [SerializeField] private GameObject tellJokeToCrowdUI;
+    [SerializeField] private GameObject uiCenterPoint;
+    [SerializeField] private Image reputationLevelImage;
+    [SerializeField] private GameObject uiContainer;
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject pagePrompts;
 
     private void Awake()
     {
@@ -100,6 +105,16 @@ public class UIManager : MonoBehaviour
     private void ReputationLevelUI()
     {
         reputationLevelImage.fillAmount = (float) GameController.Instance.GetReputationLevel() / 100;
+    }
+
+    private void ActivatePagePrompts(JokePage page)
+    {
+        pagePrompts.SetActive(true);
+    }
+
+    private void DectivatePagePrompts()
+    {
+        pagePrompts.SetActive(false);
     }
 
     private void GameOverUI()

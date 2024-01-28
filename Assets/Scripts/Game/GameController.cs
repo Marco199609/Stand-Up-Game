@@ -21,6 +21,12 @@ public class GameController : MonoBehaviour
     public delegate void GameOver();
     public static event GameOver OnGameOver;
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 0;
+        QualitySettings.vSyncCount = 0;
+    }
+
     void Start()
     {
         if(Instance == null)

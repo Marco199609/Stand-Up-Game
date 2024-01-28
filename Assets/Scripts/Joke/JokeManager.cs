@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 public class JokeManager : MonoBehaviour
 {
-    #region  Events
+    #region Events
     public delegate void TellJokeColliderVisualized();
     public static event TellJokeColliderVisualized OnTellJokeColliderVisualized;
     public delegate void TellJokeColliderUnvsualized();
@@ -33,7 +33,6 @@ public class JokeManager : MonoBehaviour
 
     #endregion
 
-
     [SerializeField] private TextAsset json;
     [SerializeField] private JokeListObject jokeList;
     [SerializeField] private JokePage[] jokePages;
@@ -49,7 +48,6 @@ public class JokeManager : MonoBehaviour
 
     private JokePage selectedJokePage;
     private JokeData currentJoke;
-    
 
     private void Awake()
     {
