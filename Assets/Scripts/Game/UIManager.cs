@@ -4,6 +4,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    #region Events
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI jokeText;
     [SerializeField] private GameObject tellJokeToCrowdUI;
@@ -19,8 +20,13 @@ public class UIManager : MonoBehaviour
         GameController.OnGameOver += GameOverUI;
         JokeManager.OnTellJokeColliderVisualized += ActivateTellJokeUI;
         JokeManager.OnTellJokeColliderUnvisualized += DeactivateTellJokeUI;
-        PlayerController.OnJokeVisualized += ShowJokeUI;
-        PlayerController.OnJokeUnvisualized += CleanJokeUI;
+        JokeManager.OnJokeSelected += ShowJokeUI;
+        JokeManager.OnJokeTold += ClearJokeUI;
+        JokeManager.OnDeselectJokePage += ActivateCenterPoint;
+        JokeManager.OnJokePageSelected += DeactivateCenterPoint;
+        JokeManager.OnTellJokeColliderVisualized += DeactivateCenterPoint;
+        JokeManager.OnTellJokeColliderUnvisualized += ActivateCenterPoint;
+        JokeManager.OnJokePageSelected += ClearJokeUI;
     }
 
     void OnDisable()
@@ -30,8 +36,20 @@ public class UIManager : MonoBehaviour
         GameController.OnGameOver -= GameOverUI;
         JokeManager.OnTellJokeColliderVisualized -= ActivateTellJokeUI;
         JokeManager.OnTellJokeColliderUnvisualized -= DeactivateTellJokeUI;
-        PlayerController.OnJokeVisualized -= ShowJokeUI;
-        PlayerController.OnJokeUnvisualized -= CleanJokeUI;
+        JokeManager.OnJokePageSelected -= DeactivateCenterPoint;
+        JokeManager.OnDeselectJokePage -= ActivateCenterPoint;
+        JokeManager.OnJokeSelected -= ShowJokeUI;
+        JokeManager.OnJokeTold -= ClearJokeUI;
+        JokeManager.OnTellJokeColliderVisualized -= DeactivateCenterPoint;
+        JokeManager.OnTellJokeColliderUnvisualized -= ActivateCenterPoint;
+        JokeManager.OnJokePageSelected -= ClearJokeUI;
+    }
+
+    #endregion
+
+    private void Awake()
+    {
+        ClearJokeUI();
     }
 
     private void ShowCountdownUI(int timeRemaining)
@@ -39,12 +57,17 @@ public class UIManager : MonoBehaviour
         timerText.text = timeRemaining.ToString();
     }
 
-    private void ShowJokeUI(string joke, JokeQuality jokeQuality)
+    private void ShowJokeUI(string joke)
     {
         jokeText.text = joke;
     }
 
-    private void CleanJokeUI()
+    private void ClearJokeUI()
+    {
+        jokeText.text = string.Empty;
+    }
+
+    private void ClearJokeUI(JokePage page)
     {
         jokeText.text = string.Empty;
     }
@@ -52,13 +75,26 @@ public class UIManager : MonoBehaviour
     private void ActivateTellJokeUI()
     {
         tellJokeToCrowdUI.SetActive(true);
-        uiCenterPoint.SetActive(false);
     }
 
     private void DeactivateTellJokeUI()
     {
         tellJokeToCrowdUI.SetActive(false);
+    }
+
+    private void ActivateCenterPoint()
+    {
         uiCenterPoint.SetActive(true);
+    }
+
+    private void DeactivateCenterPoint(JokePage jokePage)
+    {
+        uiCenterPoint.SetActive(false);
+    }
+
+        private void DeactivateCenterPoint()
+    {
+        uiCenterPoint.SetActive(false);
     }
 
     private void ReputationLevelUI()

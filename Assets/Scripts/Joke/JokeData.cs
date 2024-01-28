@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class JokeData : MonoBehaviour
 {
-    public string Joke;
+    public string Text;
     public JokeQuality JokeQuality;
 
-    public JokeData jokeData(Joke joke)
+    public JokeData jokeData(Joke text)
     {
-        Joke = joke.joke;
-        JokeQuality = joke.JokeQuality;
+        Text = text.joke;
+        JokeQuality = text.JokeQuality;
         return this;
     }
 }

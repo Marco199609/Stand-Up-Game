@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ced90872ab2b7137a7364ed27330d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jokeData: {fileID: 5961329998629635996}
+  col: {fileID: 9184369323965149221}
+  JokeData: {fileID: 5961329998629635996}
   pageText: {fileID: 3579540988814272791}
 --- !u!114 &5961329998629635996
 MonoBehaviour:
@@ -61,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7587c896d402830e49e2b13d7663d12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Joke: 
+  Text: 
   JokeQuality: 0
 --- !u!65 &9184369323965149221
 BoxCollider:

@@ -3,22 +3,53 @@ using Newtonsoft.Json;
 
 public class JokeManager : MonoBehaviour
 {
-    [SerializeField] private TextAsset json;
-    [SerializeField] private JokeListObject jokeList;
-    [SerializeField] private JokePage[] jokePages;
-    [SerializeField] private JokeData jokeSelected;
-
-    [SerializeField] private Collider TellJokeToCrowdCollider;
-    [SerializeField] private CrowdManager crowdManager;
-
-    public bool isVisualizingJokeSheet { get; private set; }
-
+    #region  Events
     public delegate void TellJokeColliderVisualized();
     public static event TellJokeColliderVisualized OnTellJokeColliderVisualized;
     public delegate void TellJokeColliderUnvsualized();
-    public static event TellJokeColliderVisualized OnTellJokeColliderUnvisualized;
+    public static event TellJokeColliderUnvsualized OnTellJokeColliderUnvisualized;
+    public delegate void JokeTold();
+    public static event JokeTold OnJokeTold;
+    public delegate void JokeSelected(string joke);
+    public static event JokeSelected OnJokeSelected;
+    public delegate void DeselectPage();
+    public static event DeselectPage OnDeselectJokePage;
+    public delegate void PageSelected(JokePage jokePage);
+    public static event PageSelected OnJokePageSelected;
+
+    private void OnEnable()
+    {
+        PlayerController.OnJokeVisualized += JokePageVisualized;
+        PlayerController.OnJokeUnvisualized += JokeSheetUnvisualized;
+        PlayerController.OnJokePageSelected += SelectJokePage;  
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnJokeVisualized -= JokePageVisualized;
+        PlayerController.OnJokeUnvisualized -= JokeSheetUnvisualized;
+        PlayerController.OnJokePageSelected -= SelectJokePage;
+    }
+
+    #endregion
+
+
+    [SerializeField] private TextAsset json;
+    [SerializeField] private JokeListObject jokeList;
+    [SerializeField] private JokePage[] jokePages;
+    [SerializeField] private Transform pageHolder;
+    [SerializeField] private Collider TellJokeToCrowdCollider;
+    [SerializeField] private CrowdManager crowdManager;
+
+    public bool IsJokePageSelected { get; private set; }
+
+    public bool isVisualizingJokeSheet { get; private set; }
 
     public static JokeManager Instance;
+
+    private JokePage selectedJokePage;
+    private JokeData currentJoke;
+    
 
     private void Awake()
     {
@@ -39,26 +70,11 @@ public class JokeManager : MonoBehaviour
         ShuffleJokes();
     }
 
-
-    private void OnEnable()
-    {
-        PlayerController.OnJokeVisualized += JokeSheetVisualized;
-        PlayerController.OnJokeUnvisualized += JokeSheetUnvisualized;
-        PlayerController.OnJokeSelected += SetSelectedJoke;   
-    }
-
-    private void OnDisable()
-    {
-        PlayerController.OnJokeVisualized -= JokeSheetVisualized;
-        PlayerController.OnJokeUnvisualized -= JokeSheetUnvisualized;
-        PlayerController.OnJokeSelected -= SetSelectedJoke;
-    }
-
     private void Update()
     {
         if(PlayerController.Instance.currentVisualizedObject == TellJokeToCrowdCollider)
         {
-            if(jokeSelected == null)
+            if(currentJoke == null)
             {
                 OnTellJokeColliderUnvisualized();
             }
@@ -68,15 +84,34 @@ public class JokeManager : MonoBehaviour
 
                 if(Input.GetMouseButtonDown(0))
                 {
-                    crowdManager.CrowdResponse(jokeSelected.JokeQuality);
-                    ShuffleJokes();
-                    jokeSelected = null;
+                    TellJoke();
                 }
             }
         }
-        else
+        else if(!IsJokePageSelected)
         {
             OnTellJokeColliderUnvisualized();
+        }
+
+        if(IsJokePageSelected)
+        {
+            if(Input.GetMouseButtonDown(1))
+            {
+                DeselectJokePage();
+
+                if(currentJoke != null)
+                {
+                    OnJokeSelected(currentJoke.Text);
+                }
+            }
+            else if(Input.GetMouseButtonDown(0))
+            {
+                if(selectedJokePage.IsPageReady(pageHolder))
+                {
+                    SelectJoke();
+                    DeselectJokePage();
+                }
+            }
         }
     }
 
@@ -85,23 +120,39 @@ public class JokeManager : MonoBehaviour
         foreach(JokePage jokePage in jokePages)
         {
             var i = Random.Range(0, jokeList.JokeList.Count - 1);
-
-            var jokeContainer = jokeList.JokeList[i];
-            
-            jokePage.pageText.text = jokeContainer.joke;
-            jokePage.jokeData.Joke = jokeContainer.joke;
-            jokePage.jokeData.JokeQuality = jokeContainer.JokeQuality;
-
-            //jokeList.JokeList.Remove(jokeContainer);
+            jokePage.SetJoke(jokeList.JokeList[i]);
         }
     }
-
-    private void SetSelectedJoke(JokeData jokeSelected)
+    private void SelectJoke()
     {
-        this.jokeSelected = jokeSelected;
+        currentJoke = selectedJokePage.JokeData;
+        OnJokeSelected(currentJoke.Text);
+    }
+    private void SelectJokePage(JokePage jokePageSelected)
+    {
+        selectedJokePage = jokePageSelected;
+        selectedJokePage.GoToViewingPosition(pageHolder);
+        IsJokePageSelected = true;
+        OnJokePageSelected(jokePageSelected);
     }
 
-    private void JokeSheetVisualized(string joke, JokeQuality jokeQuality)
+    private void DeselectJokePage()
+    {
+        selectedJokePage.GoToInitialPosition();
+        IsJokePageSelected = false;
+        OnDeselectJokePage();
+    }
+
+
+    private void TellJoke()
+    {
+        crowdManager.CrowdResponse(currentJoke.JokeQuality);
+        ShuffleJokes();
+        currentJoke = null;
+        OnJokeTold();
+    }
+
+    private void JokePageVisualized(string joke, JokeQuality jokeQuality)
     {
         isVisualizingJokeSheet = true;
     }

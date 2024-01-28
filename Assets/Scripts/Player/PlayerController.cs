@@ -1,40 +1,54 @@
+using System.Threading.Tasks;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Collider currentVisualizedObject { get; private set; }
-
-    private Camera cam;
-    private RaycastHit hit;
-
+#region Events
     public delegate void JokeVisualized(string joke, JokeQuality jokeQuality);
     public static event JokeVisualized OnJokeVisualized;
 
     public delegate void JokeUnvisualized();
     public static event JokeUnvisualized OnJokeUnvisualized;
 
-    public delegate void JokeSelected(JokeData joke);
-    public static event JokeSelected OnJokeSelected;
+    public delegate void JokePageSelected(JokePage jokePage);
+    public static event JokePageSelected OnJokePageSelected;
 
+    private void OnEnable()
+    {
+        JokeManager.OnDeselectJokePage += ResetVirtualCam;
+    }
+
+    private void OnDisable()
+    {
+        JokeManager.OnDeselectJokePage -= ResetVirtualCam;
+    }
+
+#endregion
+
+    [SerializeField] private CinemachineVirtualCamera virtualCam;
+    public Collider currentVisualizedObject { get; private set; }
     public static PlayerController Instance;
+
+    private Camera cam;
+    private RaycastHit hit;
+    private float defaultPOVSpeed = 1.5f;
+    private float defaultPOVDecelTime = 0.2f;
 
     private void Awake()
     {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
+        if(!Instance) Instance = this;
+        else Destroy(this);
 
         cam = Camera.main;
     }
 
     void Update()
     {
-        PlayerRaycast();
+        if(JokeManager.Instance.IsJokePageSelected == false)
+        {
+            PlayerRaycast();
+        }
     }
 
     private void PlayerRaycast()
@@ -45,9 +59,9 @@ public class PlayerController : MonoBehaviour
         if(Physics.Raycast(ray, out hit))
         {
             currentVisualizedObject = hit.collider;
-            if (hit.collider.TryGetComponent(out JokeData jokeData))
+            if (hit.collider.TryGetComponent(out JokePage jokePage))
             {
-                SelectJoke(jokeData);
+                SelectJokePage(jokePage);
             }
             else
             {
@@ -56,13 +70,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SelectJoke(JokeData jokeData)
+    private void SelectJokePage(JokePage jokePage)
     {
-        OnJokeVisualized(jokeData.Joke, jokeData.JokeQuality);
+        OnJokeVisualized(jokePage.JokeData.Text, jokePage.JokeData.JokeQuality);
 
         if (Input.GetMouseButtonDown(0))
         {
-            OnJokeSelected(jokeData);
+            var pov = virtualCam.GetCinemachineComponent<CinemachinePOV>();
+            pov.m_HorizontalAxis.m_MaxSpeed = 0;
+            pov.m_VerticalAxis.m_MaxSpeed = 0;
+
+            pov.m_HorizontalAxis.m_DecelTime = 0;
+            pov.m_VerticalAxis.m_DecelTime = 0;
+
+            OnJokePageSelected(jokePage);
         }
+    }
+
+    private void ResetVirtualCam()
+    {
+        var pov = virtualCam.GetCinemachineComponent<CinemachinePOV>();
+        pov.m_HorizontalAxis.m_MaxSpeed = defaultPOVSpeed;
+        pov.m_VerticalAxis.m_MaxSpeed = defaultPOVSpeed;
+
+        pov.m_HorizontalAxis.m_DecelTime = defaultPOVDecelTime;
+        pov.m_VerticalAxis.m_DecelTime = defaultPOVDecelTime;
     }
 }
