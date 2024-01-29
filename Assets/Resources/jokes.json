@@ -59,6 +59,22 @@
         {
             "joke": "Plato and a Platypus walk into a bar. The bartender looks up and says: \"What is this, a joke?\"",
             "joke_quality": 1
+        },
+        {
+            "joke": "A duck walks into a drugstore. He says \"give me some chapstick... put it on my bill\" ",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What do you call a boomerang that doesn't come back? A stick.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "Why can't a bike stand on its own? It's two tired.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Where do potatoes go when they die? To the gravy.",
+            "joke_quality": 1
         }
     ]
 }
