@@ -62,6 +62,7 @@ public class UIManager : MonoBehaviour
         ClearJokeUI();
         stopWatchFill.fillAmount = 0;
         crowdReactionTimerText.text = "";
+        jokeText.gameObject.SetActive(true);
     }
 
     private void ShowCountdownUI(int timeRemaining)

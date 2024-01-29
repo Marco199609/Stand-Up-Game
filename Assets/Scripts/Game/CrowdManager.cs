@@ -15,6 +15,14 @@ public class CrowdManager : MonoBehaviour
 
     private int reactionTick = 3;
 
+    private void Start()
+    {
+        foreach(Animator animator in characterAnimators)
+        {
+            SetInitialAnimationDelay(animator);
+        }
+    }
+
     public void CrowdResponse(JokeQuality jokeQuality)
     {
         if(!JokeManager.Instance.isVisualizingJokeSheet)
@@ -51,7 +59,7 @@ public class CrowdManager : MonoBehaviour
     {
         foreach(Animator animator in characterAnimators)
         {
-            animator.SetTrigger("sitting_clap");
+            SelectGoodResponseAnimation(animator);
         }
 
         if(jokeAudioSource.isPlaying)
@@ -74,5 +82,30 @@ public class CrowdManager : MonoBehaviour
         jokeAudioSource.Play();
         
         GameController.Instance.SubtractReputationLevel(10);
+    }
+
+    private void SetInitialAnimationDelay(Animator animator)
+    {
+        int randDelay = 200;
+        float delay = (float) Random.Range(0, randDelay) / randDelay;
+
+        string trigger = delay < 1 ? "idle" : "idle_2";
+
+        StartCoroutine(SetCrowdTriggers(animator, trigger, delay));
+    }
+
+    private void SelectGoodResponseAnimation(Animator animator)
+    {
+        int randDelay = 100;
+        float delay = (float) Random.Range(0, randDelay) / randDelay;
+        string trigger = delay > 0.5f ? "sitting_clap" : "standing_clap";
+
+        StartCoroutine(SetCrowdTriggers(animator, trigger, delay));
+    }
+
+    IEnumerator SetCrowdTriggers(Animator animator, string trigger, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        animator.SetTrigger(trigger);
     }
 }
