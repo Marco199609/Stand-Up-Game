@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 #region Events
-    public delegate void JokeVisualized(string joke, JokeQuality jokeQuality);
+    public delegate void JokeVisualized(JokePage jokePage);
     public static event JokeVisualized OnJokeVisualized;
 
     public delegate void JokeUnvisualized();
@@ -78,7 +78,10 @@ public class PlayerController : MonoBehaviour
 
     private void SelectJokePage(JokePage jokePage)
     {
-        OnJokeVisualized(jokePage.JokeData.Text, jokePage.JokeData.JokeQuality);
+        if(!JokeManager.Instance.isVisualizingJokeSheet)
+        {
+            OnJokeVisualized(jokePage);
+        }
 
         if (Input.GetMouseButtonDown(0))
         {

@@ -6,15 +6,20 @@ using System.Collections;
 public class JokePage : MonoBehaviour
 {
     [SerializeField] private Collider col;
+    [SerializeField] private GameObject pageModel;
 
     [field: SerializeField] public JokeData JokeData;
     [field: SerializeField] public TextMeshProUGUI pageText;
+    
 
     private float lerpDelay = 0.3f;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
 
     private float lerpProgress;
+    private float visualizationLerpProgress;
+
+    private bool canMoveModel;
 
     private void Awake()
     {
@@ -32,7 +37,7 @@ public class JokePage : MonoBehaviour
     public void GoToViewingPosition(Transform pageHolder)
     {         
         StopAllCoroutines();   
-        StartCoroutine(GoToViewPosition(pageHolder));
+        StartCoroutine(GoToViewJokePos(pageHolder));
     }
 
     public void GoToInitialPosition()
@@ -40,13 +45,45 @@ public class JokePage : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(GoToInitialPos());
     }
+    public void ModelGoToVisualizationPosition()
+    {
+        if(!canMoveModel)
+        {
+            StopAllCoroutines();
+            StartCoroutine(ModelGoToVisualizedPos(new Vector3(0, 0.3f, 0)));
+            canMoveModel = true;
+        }
+    }
 
+    public void ResetModelPosition()
+    {
+        if(canMoveModel)
+        {
+            StopAllCoroutines();
+            StartCoroutine(ModelGoToVisualizedPos(Vector3.zero));
+            canMoveModel = false;
+        }
+    }
     public bool IsPageReady(Transform pageHolder)
     {
         return transform.position == pageHolder.position;
     }
 
-    IEnumerator GoToViewPosition(Transform pageHolder)
+    IEnumerator ModelGoToVisualizedPos(Vector3 targetPos)
+    {
+        visualizationLerpProgress = 0;
+        Vector3 initialPos = pageModel.transform.localPosition;
+
+        while (pageModel.transform.localPosition != targetPos)
+        {
+            float percent = Interpolation.Sinerp(0.15f, ref visualizationLerpProgress);
+
+            pageModel.transform.localPosition = Vector3.Lerp(initialPos, targetPos, percent);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    IEnumerator GoToViewJokePos(Transform pageHolder)
     {
         lerpProgress = 0;
 

@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 9184369323965149221}
+  pageModel: {fileID: 6216564118350177543}
   JokeData: {fileID: 5961329998629635996}
   pageText: {fileID: 3579540988814272791}
 --- !u!114 &5961329998629635996

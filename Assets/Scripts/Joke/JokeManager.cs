@@ -46,6 +46,7 @@ public class JokeManager : MonoBehaviour
 
     public static JokeManager Instance;
 
+    private JokePage visualizedPage;
     private JokePage selectedJokePage;
     private JokeData currentJoke;
 
@@ -74,13 +75,13 @@ public class JokeManager : MonoBehaviour
         {
             if(currentJoke == null)
             {
-                OnTellJokeColliderUnvisualized();
+                JokePageUnvisualized();
             }
             else
             {
-                OnTellJokeColliderVisualized();
+                JokePageUnvisualized();
 
-                if(Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0))
                 {
                     TellJoke();
                 }
@@ -88,7 +89,7 @@ public class JokeManager : MonoBehaviour
         }
         else if(!IsJokePageSelected)
         {
-            OnTellJokeColliderUnvisualized();
+            JokePageUnvisualized();
         }
 
         if(IsJokePageSelected)
@@ -150,9 +151,21 @@ public class JokeManager : MonoBehaviour
         OnJokeTold();
     }
 
-    private void JokePageVisualized(string joke, JokeQuality jokeQuality)
+    private void JokePageVisualized(JokePage jokePage)
     {
         isVisualizingJokeSheet = true;
+        visualizedPage = jokePage;
+        visualizedPage.ModelGoToVisualizationPosition();
+    }
+
+    private void JokePageUnvisualized()
+    {
+        OnTellJokeColliderUnvisualized();
+
+        if(visualizedPage != null)
+        {
+            visualizedPage.ResetModelPosition();
+        }
     }
 
     private void JokeSheetUnvisualized()
