@@ -19,7 +19,7 @@ public class CrowdManager : MonoBehaviour
     {
         foreach(Animator animator in characterAnimators)
         {
-            SetInitialAnimationDelay(animator);
+            SetAnimationDelay(animator, "idle", "idle_2", 2);
         }
     }
 
@@ -59,7 +59,7 @@ public class CrowdManager : MonoBehaviour
     {
         foreach(Animator animator in characterAnimators)
         {
-            SelectGoodResponseAnimation(animator);
+            SetAnimationDelay(animator, "sitting_clap", "standing_clap");
         }
 
         if(jokeAudioSource.isPlaying)
@@ -74,6 +74,11 @@ public class CrowdManager : MonoBehaviour
     }
     private void BadJokeResponse()
     {
+        foreach(Animator animator in characterAnimators)
+        {
+            SetAnimationDelay(animator, "boo", "boo");
+        }
+
         if (jokeAudioSource.isPlaying)
         {
             jokeAudioSource.Stop();
@@ -84,21 +89,12 @@ public class CrowdManager : MonoBehaviour
         GameController.Instance.SubtractReputationLevel(10);
     }
 
-    private void SetInitialAnimationDelay(Animator animator)
+    private void SetAnimationDelay(Animator animator, string trigger1, string trigger2, float maxDelayInSeconds = 1, float firstTriggerProbability = 0.5f)
     {
-        int randDelay = 200;
+        int randDelay = (int) (maxDelayInSeconds * 100);
         float delay = (float) Random.Range(0, randDelay) / randDelay;
 
-        string trigger = delay < 1 ? "idle" : "idle_2";
-
-        StartCoroutine(SetCrowdTriggers(animator, trigger, delay));
-    }
-
-    private void SelectGoodResponseAnimation(Animator animator)
-    {
-        int randDelay = 100;
-        float delay = (float) Random.Range(0, randDelay) / randDelay;
-        string trigger = delay > 0.4f ? "sitting_clap" : "standing_clap";
+        string trigger = delay < (maxDelayInSeconds * firstTriggerProbability) ? trigger1 : trigger2;
 
         StartCoroutine(SetCrowdTriggers(animator, trigger, delay));
     }
