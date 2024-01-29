@@ -98,7 +98,7 @@ public class CrowdManager : MonoBehaviour
     {
         int randDelay = 100;
         float delay = (float) Random.Range(0, randDelay) / randDelay;
-        string trigger = delay > 0.5f ? "sitting_clap" : "standing_clap";
+        string trigger = delay > 0.4f ? "sitting_clap" : "standing_clap";
 
         StartCoroutine(SetCrowdTriggers(animator, trigger, delay));
     }
