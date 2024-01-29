@@ -76,7 +76,7 @@ public class CrowdManager : MonoBehaviour
     {
         foreach(Animator animator in characterAnimators)
         {
-            SetAnimationDelay(animator, "boo", "boo");
+            SetAnimationDelay(animator, "boo", "boo_2", 0.4f);
         }
 
         if (jokeAudioSource.isPlaying)
