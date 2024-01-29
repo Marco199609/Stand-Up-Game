@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SnowHorse.Utils;
 
 public class CrowdManager : MonoBehaviour
 {
-    public delegate void CrowdReactionTick(int tick);
+    public delegate void CrowdReactionTick(float reactionDelay);
     public static event CrowdReactionTick OnCrowdReactionTick;
 
 
     [SerializeField] private AudioSource jokeAudioSource;
+    [SerializeField] private AudioSource baDumTssAudioSource;
     [SerializeField] private AudioClip cheeringClip;
     [SerializeField] private AudioClip booingClip;
     [SerializeField] private List<Animator> characterAnimators;
 
-    private int reactionTick = 3;
+    private float reactionDelay = 3;
+    private float crowdDelayProgress;
 
     private void Start()
     {
@@ -33,26 +36,29 @@ public class CrowdManager : MonoBehaviour
 
     IEnumerator CrowdReactionDelay(JokeQuality jokeQuality)
     {
-        while (reactionTick > 0)
+        crowdDelayProgress = 0;
+
+        while (reactionDelay > 0)
         {
-            OnCrowdReactionTick(reactionTick);
-            yield return new WaitForSecondsRealtime(1);
-            reactionTick--;
+            float percent = Interpolation.Linear(reactionDelay, ref crowdDelayProgress);
+            reactionDelay = Mathf.Lerp(3, 0, percent);
+
+            OnCrowdReactionTick(reactionDelay);
+
+            yield return new WaitForEndOfFrame();
         }
 
-        OnCrowdReactionTick(reactionTick);
+        reactionDelay = 3;
 
-        reactionTick = 3;
-
-            switch (jokeQuality)
-            {
-                case JokeQuality.GoodJoke:
-                    GoodJokeResponse();
-                    break;
-                case JokeQuality.BadJoke:
-                    BadJokeResponse();
-                    break;
-            }
+        switch (jokeQuality)
+        {
+            case JokeQuality.GoodJoke:
+                GoodJokeResponse();
+                break;
+            case JokeQuality.BadJoke:
+                BadJokeResponse();
+                break;
+        }
     }
 
     private void GoodJokeResponse()
@@ -82,9 +88,11 @@ public class CrowdManager : MonoBehaviour
         if (jokeAudioSource.isPlaying)
         {
             jokeAudioSource.Stop();
+            baDumTssAudioSource.Stop();
         }
         jokeAudioSource.clip = booingClip;
         jokeAudioSource.Play();
+        baDumTssAudioSource.Play();
         
         GameController.Instance.SubtractReputationLevel(10);
     }

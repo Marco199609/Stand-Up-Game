@@ -117,7 +117,7 @@ public class JokeManager : MonoBehaviour
     {
         foreach(JokePage jokePage in jokePages)
         {
-            var i = Random.Range(0, jokeList.JokeList.Count - 1);
+            var i = Random.Range(0, jokeList.JokeList.Count);
             jokePage.SetJoke(jokeList.JokeList[i]);
         }
     }

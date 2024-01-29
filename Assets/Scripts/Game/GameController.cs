@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private float jokeResponseDelayInSeconds = 2;
     [SerializeField] private int reputationLevel = 50;
     [SerializeField] private int bonusDuration = 15;
+    [SerializeField] private AudioSource tickSource;
 
     public static GameController Instance;
 
@@ -18,7 +19,7 @@ public class GameController : MonoBehaviour
     public delegate void ModifyReputationLevel();
     public static event ModifyReputationLevel OnModifyReputationLevel;
 
-    public delegate void GameOver();
+    public delegate void GameOver(bool gameOver);
     public static event GameOver OnGameOver;
 
     private void Awake()
@@ -50,7 +51,7 @@ public class GameController : MonoBehaviour
     {
         if(reputationLevel <= 0)
         {
-            OnGameOver();
+            OnGameOver(true);
             Time.timeScale = 0;
         }
     }
@@ -62,9 +63,12 @@ public class GameController : MonoBehaviour
         while(turnDurationInSeconds > 0)
         {
             yield return new WaitForSecondsRealtime(1);
+            tickSource.Play();
             turnDurationInSeconds--;
             OnCountdown(turnDurationInSeconds);
         }
+
+        OnGameOver(true);
 
         yield return null;
     }

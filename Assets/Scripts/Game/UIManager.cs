@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class UIManager : MonoBehaviour
         JokeManager.OnJokePageSelected += ClearJokeUI;
         JokeManager.OnDeselectJokePage += DectivatePagePrompts;
         JokeManager.OnJokePageSelected += ActivatePagePrompts;
-        CrowdManager.OnCrowdReactionTick += ReactionTickUI;
+        CrowdManager.OnCrowdReactionTick += CrowdDelayUI;
     }
 
     void OnDisable()
@@ -40,12 +41,14 @@ public class UIManager : MonoBehaviour
         JokeManager.OnJokePageSelected -= ClearJokeUI;
         JokeManager.OnDeselectJokePage -= DectivatePagePrompts;
         JokeManager.OnJokePageSelected -= ActivatePagePrompts;
-        CrowdManager.OnCrowdReactionTick -= ReactionTickUI;
+        CrowdManager.OnCrowdReactionTick -= CrowdDelayUI;
     }
 
     #endregion
 
     [SerializeField] private Image stopWatchFill;
+    [SerializeField] private Image crowdStopwatchFill;
+    [SerializeField] private GameObject crowdStopwatchObject;
     [SerializeField] private TextMeshProUGUI jokeText;
     [SerializeField] private GameObject tellJokeToCrowdUI;
     [SerializeField] private GameObject uiCenterPoint;
@@ -55,14 +58,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject uiContainer;
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject pagePrompts;
-    [SerializeField] private TextMeshProUGUI crowdReactionTimerText;
 
     private void Awake()
     {
         ClearJokeUI();
         stopWatchFill.fillAmount = 0;
-        crowdReactionTimerText.text = "";
+        crowdStopwatchFill.fillAmount = 0;
+        crowdStopwatchObject.SetActive(false);
         jokeText.gameObject.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private void ShowCountdownUI(int timeRemaining)
@@ -97,7 +108,7 @@ public class UIManager : MonoBehaviour
 
     private void ActivateCenterPoint()
     {
-        if(crowdReactionTimerText.text.Equals(""))
+        if(!crowdStopwatchObject.activeInHierarchy)
         {
             uiCenterPoint.SetActive(true);
         }
@@ -137,17 +148,20 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void ReactionTickUI(int tick)
+    private void CrowdDelayUI(float fillAmount)
     {
-        if(tick > 0)
+        crowdStopwatchFill.fillAmount = 1 - (fillAmount / 3);
+
+        if(fillAmount > 0)
         {
-            crowdReactionTimerText.text = tick.ToString();
             DeactivateCenterPoint();
+            crowdStopwatchObject.SetActive(true);
+            
         }
         else
         {
-            crowdReactionTimerText.text = "";
             ActivateCenterPoint();
+            crowdStopwatchObject.SetActive(false);
         }
     }
 
@@ -161,7 +175,7 @@ public class UIManager : MonoBehaviour
         pagePrompts.SetActive(false);
     }
 
-    private void GameOverUI()
+    private void GameOverUI(bool gameOver)
     {
         uiContainer.SetActive(false);
         gameOverUI.SetActive(true);

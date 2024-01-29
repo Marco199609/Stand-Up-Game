@@ -13,7 +13,7 @@
             "joke_quality": 0
         },
         {
-            "joke": "What do you call a black guy flying a plane? A pilot, you fucking racist.",
+            "joke": "What do you call a black guy flying a plane? A pilot, you f-----g racist.",
             "joke_quality": 0
         },
         {
@@ -23,10 +23,41 @@
         {
             "joke": "What do you call an alligator in a vest? An Investigator.",
             "joke_quality": 0
-        }
-        ,
+        },
         {
-            "joke": "What's the difference between swine flu and bird flu? Bird flu requires tweetment, and swine flu requires oinkment!",
+            "joke": "Schrodinger's cat walks into a bar. And doesn't.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "I never make mistakes. I thought I did once; but I was wrong.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What did the fish say when he hit the wall? Dam.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "Why are pirates called pirates? 'cause they arrr!",
+            "joke_quality": 1
+        },
+        {
+            "joke": "A dyslexic man walks in to a bra.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "How many tickles does it take to get an octopus to laugh? Ten-tickles!",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What is a fake spaghetti strand? An impasta!",
+            "joke_quality": 1
+        },
+        {
+            "joke": "How do you know if someone's a vegan? They'll tell you.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Plato and a Platypus walk into a bar. The bartender looks up and says: \"What is this, a joke?\"",
             "joke_quality": 1
         }
     ]
