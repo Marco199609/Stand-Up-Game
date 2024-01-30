@@ -99,6 +99,7 @@ public class GameController : MonoBehaviour
 
     private IEnumerator GameEnding()
     {
+        PlayerController.Instance.FreezePlayer();
         specialUIBackground.gameObject.SetActive(true);
 
         if(reputationLevel <= 0)

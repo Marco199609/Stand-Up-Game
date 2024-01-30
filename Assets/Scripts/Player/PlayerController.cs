@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void FreezePlayer(float delay = 1)
+    public void FreezePlayer(float delay = 1)
     {
         if(delay > 0)
         {

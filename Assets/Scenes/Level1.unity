@@ -976,13 +976,43 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2516045987793620876, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 337.4908
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960341018423217992, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749007637214507902, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+      propertyPath: m_text
+      value: 'ENTER THE STAGE
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876311159453821368, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5168076792835070955, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 833354651}
+    - target: {fileID: 6269758728866853410, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7012451419389843784, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
       propertyPath: m_Name
       value: UIManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7963555215773902729, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+      propertyPath: m_text
+      value: CALL IT A NIGHT
+      objectReference: {fileID: 0}
+    - target: {fileID: 8332159639611149881, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+      propertyPath: m_text
+      value: TRY YOUR LUCK AGAIN!
       objectReference: {fileID: 0}
     - target: {fileID: 8862780884326590700, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -553,20 +553,23 @@ MonoBehaviour:
   specialUIBackground: {fileID: 0}
   specialUIText: {fileID: 0}
   gameOverButtons: {fileID: 0}
-  startGameText: Here you are, once again. Totally broke, you got no money to pay
-    for a place to spend the night. The only thing you got are some jokes you found
-    in Reddit. After a few hours wandering through the city, you convince someone
-    to give you a little gig at a local bar. You got 90 seconds to test your skills
-    (and hopefully get some cash for the night).
-  goodEndingText: You displayed an outstainding performance! An important person
-    was present at that moment, and you secured funding for your first tour. You
-    continue on your path to become the best comedian in history.
-  normalEndingText: You got the cash you needed for tonight! Hovever, you start thinking
-    to yourself, maybe try once more? See if you can improve your performance even
-    more next time!
-  badEndingText: Woah, that was disappointing! You get kicked out of the bar. However,
-    it's not your fault that other people's humor is broken, right? Show them what
-    real humor looks like!
+  startGameText: "Here you are, once again\u2014totally broke, with no money to spare
+    for a place to spend the night. The only possession you cling to is a handful
+    of jokes scavenged from Reddit. After a few hours of aimless wandering through
+    the city, you manage to convince someone to give you a shot at a small gig in
+    a local bar. With just 90 seconds on the stage, you aim to test your skills and,
+    hopefully, pocket some cash for the night."
+  goodEndingText: You delivered an outstanding performance! In a stroke of luck,
+    a significant figure was present during that pivotal moment, and you soon secured
+    funding for your inaugural tour. Now, armed with support, you continue on your
+    path to becoming the best comedian in history.
+  normalEndingText: "You managed to scrape together the cash you needed for tonight!
+    However, a lingering thought crosses your mind \u2013 maybe it's worth giving
+    it another shot? See if you can refine and improve your performance even further
+    next time!"
+  badEndingText: Whoa, that was disappointing! You find yourself unceremoniously
+    kicked out of the bar. But hey, it's not your fault if other people's sense of
+    humor is a bit broken, right? Time to show them what real humor looks like!
 --- !u!1 &9116515055952633569
 GameObject:
   m_ObjectHideFlags: 0
