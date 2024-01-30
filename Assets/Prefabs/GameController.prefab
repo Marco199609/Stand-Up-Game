@@ -436,8 +436,8 @@ MonoBehaviour:
     to yourself, maybe try once more? See if you can improve your performance even
     more next time!
   badEndingText: Woah, that was disappointing! You get kicked out of the bar. However,
-    other people's opinions won't affect you, right? Show them what real humor looks
-    like!
+    it's not your fault that other people's humor is broken, right? Show them what
+    real humor looks like!
 --- !u!1 &9116515055952633569
 GameObject:
   m_ObjectHideFlags: 0
