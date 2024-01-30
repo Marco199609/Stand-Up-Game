@@ -425,8 +425,8 @@ MonoBehaviour:
   specialUIText: {fileID: 0}
   gameOverButtons: {fileID: 0}
   startGameText: Here you are, once again. Totally broke, you got no money to pay
-    for a place to spend the night. The only thing you got are some jokes you wrote
-    down recently. After a few hours wandering through the city, you convince someone
+    for a place to spend the night. The only thing you got are some jokes you found
+    in Reddit. After a few hours wandering through the city, you convince someone
     to give you a little gig at a local bar. You got 90 seconds to test your skills
     (and hopefully get some cash for the night).
   goodEndingText: You displayed an outstainding performance! An important person
