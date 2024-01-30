@@ -78,11 +78,8 @@ public class PlayerController : MonoBehaviour
 
     private void SelectJokePage(JokePage jokePage)
     {
-        if(!JokeManager.Instance.isVisualizingJokeSheet)
-        {
-            OnJokeVisualized(jokePage);
-        }
-
+        OnJokeVisualized(jokePage);
+        
         if (Input.GetMouseButtonDown(0))
         {
             FreezePlayer();

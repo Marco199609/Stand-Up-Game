@@ -6,8 +6,8 @@ public class JokeManager : MonoBehaviour
     #region Events
     public delegate void TellJokeColliderVisualized();
     public static event TellJokeColliderVisualized OnTellJokeColliderVisualized;
-    public delegate void TellJokeColliderUnvsualized();
-    public static event TellJokeColliderUnvsualized OnTellJokeColliderUnvisualized;
+    public delegate void TellJokeColliderUnvisualized();
+    public static event TellJokeColliderUnvisualized OnTellJokeColliderUnvisualized;
     public delegate void JokeTold();
     public static event JokeTold OnJokeTold;
     public delegate void JokeSelected(string joke);
@@ -75,11 +75,11 @@ public class JokeManager : MonoBehaviour
         {
             if(currentJoke == null)
             {
-                JokePageUnvisualized();
+                OnTellJokeColliderUnvisualized();
             }
             else
             {
-                JokePageUnvisualized();
+                OnTellJokeColliderVisualized();
 
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -89,7 +89,7 @@ public class JokeManager : MonoBehaviour
         }
         else if(!IsJokePageSelected)
         {
-            JokePageUnvisualized();
+            OnTellJokeColliderUnvisualized();
         }
 
         if(IsJokePageSelected)
@@ -158,18 +158,14 @@ public class JokeManager : MonoBehaviour
         visualizedPage.ModelGoToVisualizationPosition();
     }
 
-    private void JokePageUnvisualized()
+    private void JokeSheetUnvisualized()
     {
-        OnTellJokeColliderUnvisualized();
+
+        isVisualizingJokeSheet = false;
 
         if(visualizedPage != null)
         {
             visualizedPage.ResetModelPosition();
         }
-    }
-
-    private void JokeSheetUnvisualized()
-    {
-        isVisualizingJokeSheet = false;
     }
 }

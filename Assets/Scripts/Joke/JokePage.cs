@@ -15,11 +15,15 @@ public class JokePage : MonoBehaviour
     private float lerpDelay = 0.3f;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
-
     private float lerpProgress;
     private float visualizationLerpProgress;
-
     private bool canMoveModel;
+
+    private Coroutine goToViewingPosition;
+    private Coroutine goToInitialPosition;
+
+    private Coroutine resetModelPosition;
+    private Coroutine modelGoToVisualizationPosition;
 
     private void Awake()
     {
@@ -36,22 +40,24 @@ public class JokePage : MonoBehaviour
 
     public void GoToViewingPosition(Transform pageHolder)
     {         
-        StopAllCoroutines();   
-        StartCoroutine(GoToViewJokePos(pageHolder));
+        if(goToInitialPosition != null) StopCoroutine(goToInitialPosition);   
+        goToViewingPosition = StartCoroutine(GoToViewJokePos(pageHolder));
+
+        if(modelGoToVisualizationPosition != null) StopCoroutine(modelGoToVisualizationPosition);
+        resetModelPosition = StartCoroutine(ModelGoToVisualizedPos(Vector3.zero, 0.2f, false));
     }
 
     public void GoToInitialPosition()
     {
-        StopAllCoroutines();
-        StartCoroutine(GoToInitialPos());
+        if(goToViewingPosition != null) StopCoroutine(goToViewingPosition);
+        goToInitialPosition = StartCoroutine(GoToInitialPos());
     }
     public void ModelGoToVisualizationPosition()
     {
         if(!canMoveModel)
         {
-            StopAllCoroutines();
-            StartCoroutine(ModelGoToVisualizedPos(new Vector3(0, 0.3f, 0)));
-            canMoveModel = true;
+            if(resetModelPosition != null) StopCoroutine(resetModelPosition);
+            modelGoToVisualizationPosition = StartCoroutine(ModelGoToVisualizedPos(new Vector3(0, 0.3f, 0), 0.4f, true));
         }
     }
 
@@ -59,9 +65,8 @@ public class JokePage : MonoBehaviour
     {
         if(canMoveModel)
         {
-            StopAllCoroutines();
-            StartCoroutine(ModelGoToVisualizedPos(Vector3.zero));
-            canMoveModel = false;
+            if(modelGoToVisualizationPosition != null) StopCoroutine(modelGoToVisualizationPosition);
+            resetModelPosition = StartCoroutine(ModelGoToVisualizedPos(Vector3.zero, 0.4f, false));
         }
     }
     public bool IsPageReady(Transform pageHolder)
@@ -69,18 +74,20 @@ public class JokePage : MonoBehaviour
         return transform.position == pageHolder.position;
     }
 
-    IEnumerator ModelGoToVisualizedPos(Vector3 targetPos)
+    IEnumerator ModelGoToVisualizedPos(Vector3 targetPos, float delay, bool canMoveModel)
     {
         visualizationLerpProgress = 0;
         Vector3 initialPos = pageModel.transform.localPosition;
 
         while (pageModel.transform.localPosition != targetPos)
         {
-            float percent = Interpolation.Sinerp(0.15f, ref visualizationLerpProgress);
+            float percent = Interpolation.Sinerp(delay, ref visualizationLerpProgress);
 
             pageModel.transform.localPosition = Vector3.Lerp(initialPos, targetPos, percent);
             yield return new WaitForEndOfFrame();
         }
+
+        this.canMoveModel = canMoveModel;
     }
 
     IEnumerator GoToViewJokePos(Transform pageHolder)
@@ -92,12 +99,15 @@ public class JokePage : MonoBehaviour
         Vector3 targetPosition = pageHolder.position;
         Quaternion targetRotation = pageHolder.rotation;
 
+        Vector3 modelLocalPos = pageModel.transform.localPosition;
+
         while(transform.position != targetPosition)
         {
             float percent = Interpolation.Sinerp(lerpDelay, ref lerpProgress);
 
             transform.position = Vector3.Lerp(initialPosition, targetPosition, percent);
             transform.rotation = Quaternion.Lerp(initialRotation, targetRotation, percent);
+
             yield return new WaitForEndOfFrame();
         }
     }
