@@ -56,7 +56,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite[] reputationStateSprites;
     [SerializeField] private Image reputationLevelFill;
     [SerializeField] private GameObject uiContainer;
-    [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject pagePrompts;
 
     private void Awake()
@@ -66,14 +65,6 @@ public class UIManager : MonoBehaviour
         crowdStopwatchFill.fillAmount = 0;
         crowdStopwatchObject.SetActive(false);
         jokeText.gameObject.SetActive(true);
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
     }
 
     private void ShowCountdownUI(int timeRemaining)
@@ -178,6 +169,5 @@ public class UIManager : MonoBehaviour
     private void GameOverUI(bool gameOver)
     {
         uiContainer.SetActive(false);
-        gameOverUI.SetActive(true);
     }
 }

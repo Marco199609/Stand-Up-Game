@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Cinemachine;
 using UnityEngine;
 
@@ -79,7 +78,7 @@ public class PlayerController : MonoBehaviour
     private void SelectJokePage(JokePage jokePage)
     {
         OnJokeVisualized(jokePage);
-        
+
         if (Input.GetMouseButtonDown(0))
         {
             FreezePlayer();
@@ -115,7 +114,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void ResetVirtualCam(float delay = 0)
+    public void ResetVirtualCam(float delay = 0)
     {
         if(delay <= 0)
         {
