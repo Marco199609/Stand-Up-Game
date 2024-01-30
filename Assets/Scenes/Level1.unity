@@ -854,6 +854,10 @@ PrefabInstance:
       propertyPath: characterAnimators.Array.data[2]
       value: 
       objectReference: {fileID: 487874000}
+    - target: {fileID: 5260367996003106360, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6380625233701801979, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
       propertyPath: m_Name
       value: GameController

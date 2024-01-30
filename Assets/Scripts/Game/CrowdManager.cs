@@ -68,13 +68,7 @@ public class CrowdManager : MonoBehaviour
             SetAnimationDelay(animator, "sitting_clap", "standing_clap");
         }
 
-        if(jokeAudioSource.isPlaying)
-        {
-            jokeAudioSource.Stop();
-        }
-
-        jokeAudioSource.clip = cheeringClip;
-        jokeAudioSource.Play();
+        jokeAudioSource.PlayOneShot(cheeringClip, 0.6f);
 
         GameController.Instance.AddReputationLevel(5);
     }
@@ -85,13 +79,7 @@ public class CrowdManager : MonoBehaviour
             SetAnimationDelay(animator, "boo", "boo_2", 0.4f);
         }
 
-        if (jokeAudioSource.isPlaying)
-        {
-            jokeAudioSource.Stop();
-            baDumTssAudioSource.Stop();
-        }
-        jokeAudioSource.clip = booingClip;
-        jokeAudioSource.Play();
+        jokeAudioSource.PlayOneShot(booingClip, 0.2f);
         baDumTssAudioSource.Play();
         
         GameController.Instance.SubtractReputationLevel(10);
