@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour
     private Camera cam;
     private CinemachinePOV vcPOV;
     private RaycastHit hit;
-    private float defaultPOVSpeed = 1.5f;
-    private float defaultPOVDecelTime = 0.2f;
+    private float defaultPOVSpeed = 700f;
+    private float defaultPOVDecelTime = 0.05f;
 
     private void Awake()
     {
@@ -93,24 +93,15 @@ public class PlayerController : MonoBehaviour
     {
         if(delay > 0)
         {
-            vcPOV.m_HorizontalAxis.m_MaxSpeed = 0;
-            vcPOV.m_VerticalAxis.m_MaxSpeed = 0;
-
-            vcPOV.m_HorizontalAxis.m_DecelTime = 0;
-            vcPOV.m_VerticalAxis.m_DecelTime = 0;
+            SetVCam(0, 0);
         }
-
     }
 
     private void FreezePlayer(bool gameOver)
     {
         if(gameOver)
         {
-            vcPOV.m_HorizontalAxis.m_MaxSpeed = 0;
-            vcPOV.m_VerticalAxis.m_MaxSpeed = 0;
-
-            vcPOV.m_HorizontalAxis.m_DecelTime = 0;
-            vcPOV.m_VerticalAxis.m_DecelTime = 0;
+            SetVCam(0, 0);
         }
     }
 
@@ -118,19 +109,20 @@ public class PlayerController : MonoBehaviour
     {
         if(delay <= 0)
         {
-            vcPOV.m_HorizontalAxis.m_MaxSpeed = defaultPOVSpeed;
-            vcPOV.m_VerticalAxis.m_MaxSpeed = defaultPOVSpeed;
-
-            vcPOV.m_HorizontalAxis.m_DecelTime = defaultPOVDecelTime;
-            vcPOV.m_VerticalAxis.m_DecelTime = defaultPOVDecelTime;
+            SetVCam(defaultPOVSpeed, defaultPOVDecelTime);
         }
     }
     private void ResetVirtualCam()
     {
-        vcPOV.m_HorizontalAxis.m_MaxSpeed = defaultPOVSpeed;
-        vcPOV.m_VerticalAxis.m_MaxSpeed = defaultPOVSpeed;
+        SetVCam(defaultPOVSpeed, defaultPOVDecelTime);
+    }
 
-        vcPOV.m_HorizontalAxis.m_DecelTime = defaultPOVDecelTime;
-        vcPOV.m_VerticalAxis.m_DecelTime = defaultPOVDecelTime;
+    private void SetVCam(float maxSpeed, float decelTime)
+    {
+        vcPOV.m_HorizontalAxis.m_MaxSpeed = maxSpeed;
+        vcPOV.m_VerticalAxis.m_MaxSpeed = maxSpeed;
+
+        vcPOV.m_HorizontalAxis.m_DecelTime = decelTime;
+        vcPOV.m_VerticalAxis.m_DecelTime = decelTime;
     }
 }
