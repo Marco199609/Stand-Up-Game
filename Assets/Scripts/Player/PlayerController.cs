@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance;
 
     private Camera cam;
+    private CinemachinePOV vcPOV;
     private RaycastHit hit;
     private float defaultPOVSpeed = 1.5f;
     private float defaultPOVDecelTime = 0.2f;
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
         else Destroy(this);
 
         cam = Camera.main;
+        vcPOV = virtualCam.GetCinemachineComponent<CinemachinePOV>();
     }
 
     void Update()
@@ -91,12 +93,11 @@ public class PlayerController : MonoBehaviour
     {
         if(delay > 0)
         {
-            var pov = virtualCam.GetCinemachineComponent<CinemachinePOV>();
-            pov.m_HorizontalAxis.m_MaxSpeed = 0;
-            pov.m_VerticalAxis.m_MaxSpeed = 0;
+            vcPOV.m_HorizontalAxis.m_MaxSpeed = 0;
+            vcPOV.m_VerticalAxis.m_MaxSpeed = 0;
 
-            pov.m_HorizontalAxis.m_DecelTime = 0;
-            pov.m_VerticalAxis.m_DecelTime = 0;
+            vcPOV.m_HorizontalAxis.m_DecelTime = 0;
+            vcPOV.m_VerticalAxis.m_DecelTime = 0;
         }
 
     }
@@ -105,12 +106,11 @@ public class PlayerController : MonoBehaviour
     {
         if(gameOver)
         {
-            var pov = virtualCam.GetCinemachineComponent<CinemachinePOV>();
-            pov.m_HorizontalAxis.m_MaxSpeed = 0;
-            pov.m_VerticalAxis.m_MaxSpeed = 0;
+            vcPOV.m_HorizontalAxis.m_MaxSpeed = 0;
+            vcPOV.m_VerticalAxis.m_MaxSpeed = 0;
 
-            pov.m_HorizontalAxis.m_DecelTime = 0;
-            pov.m_VerticalAxis.m_DecelTime = 0;
+            vcPOV.m_HorizontalAxis.m_DecelTime = 0;
+            vcPOV.m_VerticalAxis.m_DecelTime = 0;
         }
     }
 
@@ -118,21 +118,19 @@ public class PlayerController : MonoBehaviour
     {
         if(delay <= 0)
         {
-            var pov = virtualCam.GetCinemachineComponent<CinemachinePOV>();
-            pov.m_HorizontalAxis.m_MaxSpeed = defaultPOVSpeed;
-            pov.m_VerticalAxis.m_MaxSpeed = defaultPOVSpeed;
+            vcPOV.m_HorizontalAxis.m_MaxSpeed = defaultPOVSpeed;
+            vcPOV.m_VerticalAxis.m_MaxSpeed = defaultPOVSpeed;
 
-            pov.m_HorizontalAxis.m_DecelTime = defaultPOVDecelTime;
-            pov.m_VerticalAxis.m_DecelTime = defaultPOVDecelTime;
+            vcPOV.m_HorizontalAxis.m_DecelTime = defaultPOVDecelTime;
+            vcPOV.m_VerticalAxis.m_DecelTime = defaultPOVDecelTime;
         }
     }
     private void ResetVirtualCam()
     {
-        var pov = virtualCam.GetCinemachineComponent<CinemachinePOV>();
-        pov.m_HorizontalAxis.m_MaxSpeed = defaultPOVSpeed;
-        pov.m_VerticalAxis.m_MaxSpeed = defaultPOVSpeed;
+        vcPOV.m_HorizontalAxis.m_MaxSpeed = defaultPOVSpeed;
+        vcPOV.m_VerticalAxis.m_MaxSpeed = defaultPOVSpeed;
 
-        pov.m_HorizontalAxis.m_DecelTime = defaultPOVDecelTime;
-        pov.m_VerticalAxis.m_DecelTime = defaultPOVDecelTime;
+        vcPOV.m_HorizontalAxis.m_DecelTime = defaultPOVDecelTime;
+        vcPOV.m_VerticalAxis.m_DecelTime = defaultPOVDecelTime;
     }
 }
