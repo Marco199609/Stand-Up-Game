@@ -788,7 +788,7 @@ MonoBehaviour:
   m_RecenterTarget: 0
   m_VerticalAxis:
     Value: 0
-    m_SpeedMode: 1
+    m_SpeedMode: 0
     m_MaxSpeed: 0
     m_AccelTime: 0.1
     m_DecelTime: 0
@@ -812,7 +812,7 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_HorizontalAxis:
     Value: 0
-    m_SpeedMode: 1
+    m_SpeedMode: 0
     m_MaxSpeed: 0
     m_AccelTime: 0.1
     m_DecelTime: 0
