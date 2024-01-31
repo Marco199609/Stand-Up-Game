@@ -18614,6 +18614,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3244826116778561841, guid: b92124858cdee2593becca60d591af70, type: 3}
+      propertyPath: m_Range
+      value: 7.1880603
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244826116778561841, guid: b92124858cdee2593becca60d591af70, type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
@@ -18631,7 +18635,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3244826116778561841, guid: b92124858cdee2593becca60d591af70, type: 3}
       propertyPath: m_SpotAngle
-      value: 43.6028
+      value: 43.60278
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244826116778561841, guid: b92124858cdee2593becca60d591af70, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5005610203383272716, guid: b92124858cdee2593becca60d591af70, type: 3}
       propertyPath: m_StaticEditorFlags

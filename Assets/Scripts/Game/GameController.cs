@@ -49,7 +49,10 @@ public class GameController : MonoBehaviour
         Application.targetFrameRate = 0;
         QualitySettings.vSyncCount = 0;
 
-        if(Instance == null)
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if (Instance == null)
         {
             Instance = this;
         }

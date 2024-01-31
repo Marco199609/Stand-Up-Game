@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.114806294, g: 0.11977117, b: 0.10575721, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -421,7 +421,7 @@ MonoBehaviour:
     m_Bits: 8
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
-  antialiasingMode: 0
+  antialiasingMode: 1
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -433,8 +433,8 @@ MonoBehaviour:
     fastMode: 0
     keepAlpha: 0
   fog:
-    enabled: 1
-    excludeSkybox: 1
+    enabled: 0
+    excludeSkybox: 0
   debugLayer:
     lightMeter:
       width: 512
@@ -854,17 +854,9 @@ PrefabInstance:
       propertyPath: characterAnimators.Array.data[2]
       value: 
       objectReference: {fileID: 487874000}
-    - target: {fileID: 5260367996003106360, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
-      propertyPath: m_Volume
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 6380625233701801979, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
       propertyPath: m_Name
       value: GameController
-      objectReference: {fileID: 0}
-    - target: {fileID: 6380625233701801979, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -882,18 +874,6 @@ PrefabInstance:
     - target: {fileID: 306378860874657328, guid: 57dee7e5473f0febca4c3f22cc8cbf2e, type: 3}
       propertyPath: m_Name
       value: Environment
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795057028614313777, guid: 57dee7e5473f0febca4c3f22cc8cbf2e, type: 3}
-      propertyPath: m_Range
-      value: 7.1880603
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795057028614313777, guid: 57dee7e5473f0febca4c3f22cc8cbf2e, type: 3}
-      propertyPath: m_Intensity
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795057028614313777, guid: 57dee7e5473f0febca4c3f22cc8cbf2e, type: 3}
-      propertyPath: m_SpotAngle
-      value: 43.60278
       objectReference: {fileID: 0}
     - target: {fileID: 8834672230771769127, guid: 57dee7e5473f0febca4c3f22cc8cbf2e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -992,47 +972,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2516045987793620876, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 337.4908
-      objectReference: {fileID: 0}
-    - target: {fileID: 2960341018423217992, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3749007637214507902, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
-      propertyPath: m_text
-      value: 'ENTER THE STAGE
-
-'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4876311159453821368, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5168076792835070955, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 833354651}
-    - target: {fileID: 6269758728866853410, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7012451419389843784, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
       propertyPath: m_Name
       value: UIManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7012451419389843784, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7963555215773902729, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
-      propertyPath: m_text
-      value: CALL IT A NIGHT
-      objectReference: {fileID: 0}
-    - target: {fileID: 8332159639611149881, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
-      propertyPath: m_text
-      value: TRY YOUR LUCK AGAIN!
       objectReference: {fileID: 0}
     - target: {fileID: 8862780884326590700, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
