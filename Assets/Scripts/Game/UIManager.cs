@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Collections;
+using SnowHorse.Utils;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class UIManager : MonoBehaviour
         GameController.OnCountdown += ShowCountdownUI;
         GameController.OnModifyReputationLevel += ReputationLevelUI;
         GameController.OnGameOver += GameOverUI;
+        GameController.OnAddBonusTime += AddBonusTimeUI;
         JokeManager.OnTellJokeColliderVisualized += ActivateTellJokeUI;
         JokeManager.OnTellJokeColliderUnvisualized += DeactivateTellJokeUI;
         JokeManager.OnJokeSelected += ShowJokeUI;
@@ -30,6 +33,7 @@ public class UIManager : MonoBehaviour
         GameController.OnCountdown -= ShowCountdownUI;
         GameController.OnModifyReputationLevel -= ReputationLevelUI;
         GameController.OnGameOver -= GameOverUI;
+        GameController.OnAddBonusTime -= AddBonusTimeUI;
         JokeManager.OnTellJokeColliderVisualized -= ActivateTellJokeUI;
         JokeManager.OnTellJokeColliderUnvisualized -= DeactivateTellJokeUI;
         JokeManager.OnJokePageSelected -= DeactivateCenterPoint;
@@ -57,6 +61,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image reputationLevelFill;
     [SerializeField] private GameObject uiContainer;
     [SerializeField] private GameObject pagePrompts;
+    [SerializeField] private RectTransform addedBonusUI; 
+    [SerializeField] private AnimationCurve bonusTextCurve;
+
+    private float addedBonusUILerpProgress;
 
     private void Awake()
     {
@@ -64,6 +72,7 @@ public class UIManager : MonoBehaviour
         stopWatchFill.fillAmount = 0;
         crowdStopwatchFill.fillAmount = 0;
         crowdStopwatchObject.SetActive(false);
+        addedBonusUI.gameObject.SetActive(false);
         jokeText.gameObject.SetActive(true);
     }
 
@@ -169,5 +178,33 @@ public class UIManager : MonoBehaviour
     private void GameOverUI(bool gameOver)
     {
         uiContainer.SetActive(false);
+    }
+
+    private void AddBonusTimeUI()
+    {
+        addedBonusUI.gameObject.SetActive(true);
+        DeactivateCenterPoint();
+        StartCoroutine(AddBonusTimeManage());
+    }
+
+    private IEnumerator AddBonusTimeManage()
+    {
+        addedBonusUILerpProgress = 0;
+        Vector3 targetScale = Vector3.one * 1.3f;
+        var text = addedBonusUI.GetComponent<TextMeshProUGUI>();
+
+        while(addedBonusUI.localScale != targetScale)
+        {
+            var percent = Interpolation.Smoother(1.5f, ref addedBonusUILerpProgress);
+            addedBonusUI.localScale = Vector3.Slerp(Vector3.one, targetScale, percent);
+
+            //bonusTextCurve.Evaluate(percent);
+            text.color = new Color(1, 1 ,1, bonusTextCurve.Evaluate(percent));
+
+            yield return new WaitForEndOfFrame();
+        }
+        addedBonusUI.gameObject.SetActive(false);
+        addedBonusUI.localScale = Vector3.one;
+        ActivateCenterPoint();
     }
 }

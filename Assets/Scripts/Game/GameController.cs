@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
     public static event ModifyReputationLevel OnModifyReputationLevel;
     public delegate void GameOver(bool gameOver);
     public static event GameOver OnGameOver;
+    public delegate void AddBonusTime();
+    public static event AddBonusTime OnAddBonusTime;
     #endregion
     
     #region GameScripts
@@ -155,8 +157,6 @@ public class GameController : MonoBehaviour
         Application.Quit();
     }
 
-
-
     private void Update()
     {
         if(reputationLevel <= 0 || turnDurationInSeconds <= 0)
@@ -210,7 +210,8 @@ public class GameController : MonoBehaviour
 
         if(reputationLevel >= 100)
         {
-            turnDurationInSeconds += bonusDuration;
+            AddSecondsToTurn(bonusDuration);
+            OnAddBonusTime();
             reputationLevel = 50;
         }
 

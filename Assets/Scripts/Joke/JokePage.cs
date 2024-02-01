@@ -59,7 +59,7 @@ public class JokePage : MonoBehaviour
         if(!canMoveModel)
         {
             if(resetModelPosition != null) StopCoroutine(resetModelPosition);
-            modelGoToVisualizationPosition = StartCoroutine(ModelGoToVisualizedPos(new Vector3(0, 0.15f, 0), 0.4f, true));
+            modelGoToVisualizationPosition = StartCoroutine(ModelGoToVisualizedPos(targetPos: new Vector3(0, 0.15f, 0), delay: 0.4f, canMoveModel: true));
         }
     }
 
@@ -68,7 +68,7 @@ public class JokePage : MonoBehaviour
         if(canMoveModel)
         {
             if(modelGoToVisualizationPosition != null) StopCoroutine(modelGoToVisualizationPosition);
-            resetModelPosition = StartCoroutine(ModelGoToVisualizedPos(Vector3.zero, 0.4f, false));
+            resetModelPosition = StartCoroutine(ModelGoToVisualizedPos(targetPos: Vector3.zero, delay: 0.4f, canMoveModel: false));
         }
     }
     public bool IsPageReady(Transform pageHolder)
