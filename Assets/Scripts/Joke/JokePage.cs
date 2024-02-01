@@ -14,6 +14,7 @@ public class JokePage : MonoBehaviour
 
     private float lerpDelay = 0.3f;
     private Vector3 initialPosition;
+    private Vector3 initialScale;
     private Quaternion initialRotation;
     private float lerpProgress;
     private float visualizationLerpProgress;
@@ -29,6 +30,7 @@ public class JokePage : MonoBehaviour
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;
+        initialScale = transform.localScale;
     }
 
     public void SetJoke(Joke joke)
@@ -57,7 +59,7 @@ public class JokePage : MonoBehaviour
         if(!canMoveModel)
         {
             if(resetModelPosition != null) StopCoroutine(resetModelPosition);
-            modelGoToVisualizationPosition = StartCoroutine(ModelGoToVisualizedPos(new Vector3(0, 0.3f, 0), 0.4f, true));
+            modelGoToVisualizationPosition = StartCoroutine(ModelGoToVisualizedPos(new Vector3(0, 0.15f, 0), 0.4f, true));
         }
     }
 
@@ -93,13 +95,10 @@ public class JokePage : MonoBehaviour
     IEnumerator GoToViewJokePos(Transform pageHolder)
     {
         lerpProgress = 0;
-
         col.enabled = false;
         
         Vector3 targetPosition = pageHolder.position;
         Quaternion targetRotation = pageHolder.rotation;
-
-        Vector3 modelLocalPos = pageModel.transform.localPosition;
 
         while(transform.position != targetPosition)
         {
@@ -107,6 +106,7 @@ public class JokePage : MonoBehaviour
 
             transform.position = Vector3.Lerp(initialPosition, targetPosition, percent);
             transform.rotation = Quaternion.Lerp(initialRotation, targetRotation, percent);
+            transform.localScale = Vector3.Lerp(initialScale, initialScale * 0.6f, percent);
 
             yield return new WaitForEndOfFrame();
         }
@@ -119,9 +119,11 @@ public class JokePage : MonoBehaviour
             lerpProgress = 0;
             Vector3 startPosition = transform.position;
             Quaternion startRotation = transform.rotation;
+            Vector3 startScale = transform.localScale;
 
             Vector3 targetPosition = initialPosition;
             Quaternion targetRotation = initialRotation;
+            Vector3 targetScale = initialScale;
 
             while(transform.position != initialPosition)
             {
@@ -129,6 +131,7 @@ public class JokePage : MonoBehaviour
 
                 transform.position = Vector3.Lerp(startPosition, targetPosition, percent);
                 transform.rotation = Quaternion.Lerp(startRotation, targetRotation, percent);
+                transform.localScale = Vector3.Lerp(startScale, targetScale, percent);
                 yield return new WaitForEndOfFrame();
             }
 

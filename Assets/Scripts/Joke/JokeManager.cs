@@ -19,14 +19,14 @@ public class JokeManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerController.OnJokeVisualized += JokePageVisualized;
+        PlayerController.OnJokeVisualized += JokePageVisualization;
         PlayerController.OnJokeUnvisualized += JokeSheetUnvisualized;
         PlayerController.OnJokePageSelected += SelectJokePage;  
     }
 
     private void OnDisable()
     {
-        PlayerController.OnJokeVisualized -= JokePageVisualized;
+        PlayerController.OnJokeVisualized -= JokePageVisualization;
         PlayerController.OnJokeUnvisualized -= JokeSheetUnvisualized;
         PlayerController.OnJokePageSelected -= SelectJokePage;
     }
@@ -151,21 +151,27 @@ public class JokeManager : MonoBehaviour
         OnJokeTold();
     }
 
-    private void JokePageVisualized(JokePage jokePage)
-    {
-        isVisualizingJokeSheet = true;
-        visualizedPage = jokePage;
-        visualizedPage.ModelGoToVisualizationPosition();
-    }
-
     private void JokeSheetUnvisualized()
     {
+        JokePageVisualization(null);
+    }
 
-        isVisualizingJokeSheet = false;
-
-        if(visualizedPage != null)
+    private void JokePageVisualization(JokePage jokePage)
+    {
+        if(visualizedPage != null && visualizedPage != jokePage)
         {
             visualizedPage.ResetModelPosition();
+        }
+
+        if(jokePage != null)
+        {
+            isVisualizingJokeSheet = true;
+            visualizedPage = jokePage;
+            visualizedPage.ModelGoToVisualizationPosition();
+        }
+        else
+        {
+            isVisualizingJokeSheet = false;
         }
     }
 }
