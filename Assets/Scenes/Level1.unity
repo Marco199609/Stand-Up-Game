@@ -123,6 +123,28 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &356123453 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1272755452119487673, guid: caee0133399647d0e9656bf09a6d4d9e, type: 3}
+  m_PrefabInstance: {fileID: 8532352265880093018}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4293bd50b87de8fa81379a7c3491dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &423719027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3166108995963579252, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+  m_PrefabInstance: {fileID: 7200628500148461950}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456a8dd855de7640e844a42a7bdf8ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &427936076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3854574136275399001, guid: caee0133399647d0e9656bf09a6d4d9e, type: 3}
@@ -132,6 +154,22 @@ Transform:
 Animator:
   m_CorrespondingSourceObject: {fileID: 8946179822632757098, guid: 57dee7e5473f0febca4c3f22cc8cbf2e, type: 3}
   m_PrefabInstance: {fileID: 6739868791137147121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &528506018 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6837295238449862192, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+  m_PrefabInstance: {fileID: 7200628500148461950}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &535309003 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4876311159453821368, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+  m_PrefabInstance: {fileID: 7200628500148461950}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &570267838 stripped
 BoxCollider:
@@ -158,6 +196,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e0f829b58440a134851f604fa62b047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1096849462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1056791673181097635, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+  m_PrefabInstance: {fileID: 7200628500148461950}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1198677628
@@ -343,6 +392,26 @@ PrefabInstance:
       propertyPath: jokePages.Array.data[3]
       value: 
       objectReference: {fileID: 1878797003}
+    - target: {fileID: 3490176743492749280, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 423719027}
+    - target: {fileID: 3490176743492749280, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
+      propertyPath: specialUIText
+      value: 
+      objectReference: {fileID: 1096849462}
+    - target: {fileID: 3490176743492749280, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
+      propertyPath: gameOverButtons
+      value: 
+      objectReference: {fileID: 535309003}
+    - target: {fileID: 3490176743492749280, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 356123453}
+    - target: {fileID: 3490176743492749280, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
+      propertyPath: specialUIBackground
+      value: 
+      objectReference: {fileID: 528506018}
     - target: {fileID: 3812107014472184505, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
       propertyPath: characterAnimators.Array.data[0]
       value: 
