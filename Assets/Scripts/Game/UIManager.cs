@@ -4,6 +4,7 @@ using TMPro;
 using System;
 using System.Collections;
 using SnowHorse.Utils;
+using Unity.VisualScripting;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public class UIManager : MonoBehaviour
         JokeManager.OnTellJokeColliderVisualized += ActivateTellJokeUI;
         JokeManager.OnTellJokeColliderUnvisualized += DeactivateTellJokeUI;
         JokeManager.OnJokeSelected += ShowJokeUI;
+        JokeManager.OnJokeSelected += DeactivateDontHesitateUI;
         JokeManager.OnJokeTold += ClearJokeUI;
+        JokeManager.OnJokeTold += ActivateDontHesitateUI;
         JokeManager.OnDeselectJokePage += ActivateCenterPoint;
         JokeManager.OnJokePageSelected += DeactivateCenterPoint;
         JokeManager.OnTellJokeColliderVisualized += DeactivateCenterPoint;
@@ -39,7 +42,9 @@ public class UIManager : MonoBehaviour
         JokeManager.OnJokePageSelected -= DeactivateCenterPoint;
         JokeManager.OnDeselectJokePage -= ActivateCenterPoint;
         JokeManager.OnJokeSelected -= ShowJokeUI;
+        JokeManager.OnJokeSelected -= DeactivateDontHesitateUI;
         JokeManager.OnJokeTold -= ClearJokeUI;
+        JokeManager.OnJokeTold -= ActivateDontHesitateUI;
         JokeManager.OnTellJokeColliderVisualized -= DeactivateCenterPoint;
         JokeManager.OnTellJokeColliderUnvisualized -= ActivateCenterPoint;
         JokeManager.OnJokePageSelected -= ClearJokeUI;
@@ -61,10 +66,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image reputationLevelFill;
     [SerializeField] private GameObject uiContainer;
     [SerializeField] private GameObject pagePrompts;
-    [SerializeField] private RectTransform addedBonusUI; 
+    [SerializeField] private RectTransform addedBonusUI;
+    [SerializeField] private TextMeshProUGUI dontHesitateText;
+    [SerializeField] private AnimationCurve dontHesitateUICurve; 
     [SerializeField] private AnimationCurve bonusTextCurve;
 
+    private float dontHesitateDelayTime = 8;
+    private float dontHesistateCurrentTime;
+    private float dontHesitateUITime = 1f;
+    
+    private float dontHesitateProgress;
     private float addedBonusUILerpProgress;
+
+    private bool isHesitating;
+
 
     private void Awake()
     {
@@ -206,5 +221,45 @@ public class UIManager : MonoBehaviour
         addedBonusUI.gameObject.SetActive(false);
         addedBonusUI.localScale = Vector3.one;
         ActivateCenterPoint();
+    }
+
+
+    private void ActivateDontHesitateUI()
+    {
+        dontHesistateCurrentTime = dontHesitateDelayTime;
+        isHesitating = true;
+        StartCoroutine(DontHesitatUIManage());
+    }
+
+    private void DeactivateDontHesitateUI(string joke)
+    {
+        isHesitating = false;
+        dontHesitateText.gameObject.SetActive(false);
+    }
+
+    private IEnumerator DontHesitatUIManage()
+    {
+        Vector3 targetScale = Vector3.one * 1.3f;
+
+        while(isHesitating)
+        {
+            if(dontHesistateCurrentTime < 0)
+            {
+                dontHesitateText.gameObject.SetActive(true);
+
+                var percent = Interpolation.Smooth(dontHesitateUITime, ref dontHesitateProgress);
+
+                if(percent >= 1) dontHesitateProgress = 0;
+
+                var animatedPercent = bonusTextCurve.Evaluate(percent);
+
+                dontHesitateText.transform.localScale = Vector3.Slerp(Vector3.one, targetScale, animatedPercent);
+                dontHesitateText.color = new Color(1, 1, 1, animatedPercent);
+
+            }
+
+            dontHesistateCurrentTime -= 0.01f;
+            yield return new WaitForSecondsRealtime(0.01f);
+        }
     }
 }
