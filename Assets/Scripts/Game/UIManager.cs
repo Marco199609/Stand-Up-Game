@@ -158,7 +158,7 @@ public class UIManager : MonoBehaviour
             if(currentReputation > 80)
             {
                 reputationLevelImage.sprite = reputationStateSprites[3];
-                reputationLevelFill.color = Color.cyan;
+                reputationLevelFill.color = Color.green;
             }
             else if(currentReputation > 65)
             {
@@ -290,7 +290,11 @@ public class UIManager : MonoBehaviour
 
         reputationStarSource.pitch = 1.10f;
         reputationStarSource.PlayOneShot(addReputationClip);
-        
+
+        reputationLevelImage.sprite = reputationStateSprites[4];
+        reputationLevelImage.color = Color.cyan;
+        reputationLevelFill.color = Color.cyan;
+
         stopWatchFill.color = Color.green;
         DeactivateCenterPoint();
         StartCoroutine(AddBonusTimeManage());
