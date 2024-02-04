@@ -150,10 +150,12 @@ public class UIManager : MonoBehaviour
         if(currentReputation > 80)
         {
             reputationLevelImage.sprite = reputationStateSprites[3];
+            reputationLevelFill.color = Color.cyan;
         }
         else if(currentReputation > 65)
         {
             reputationLevelImage.sprite = reputationStateSprites[2];
+            reputationLevelFill.color = Color.green;
         }
         else if(currentReputation > 50)
         {
@@ -162,6 +164,15 @@ public class UIManager : MonoBehaviour
         else
         {
             reputationLevelImage.sprite = reputationStateSprites[0];
+
+            if(currentReputation > 35)
+            {
+                reputationLevelFill.color = Color.yellow;
+            }
+            else
+            {
+                reputationLevelFill.color = Color.red;
+            }
         }
     }
 
