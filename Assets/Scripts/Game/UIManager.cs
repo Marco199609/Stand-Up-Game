@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 using System.Collections;
 using SnowHorse.Utils;
 using Unity.VisualScripting;
@@ -71,6 +70,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private AnimationCurve dontHesitateUICurve; 
     [SerializeField] private AnimationCurve bonusTextCurve;
     [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private AudioSource reputationStarSource;
+    [SerializeField] private AudioClip addReputationClip;
+    [SerializeField] private AudioClip subtractReputationClip;
 
     private float dontHesitateDelayTime = 8;
     private float dontHesistateCurrentTime;
@@ -78,7 +80,7 @@ public class UIManager : MonoBehaviour
     
     private float dontHesitateProgress;
     private float addedBonusUILerpProgress;
-
+    private int previousReputation;
     private bool isHesitating;
 
 
@@ -143,37 +145,62 @@ public class UIManager : MonoBehaviour
 
     private void ReputationLevelUI()
     {
-        reputationLevelFill.fillAmount = (float) GameController.Instance.GetReputationLevel() / 100;
+        if(!GameController.Instance.IsBonusTime)
+        {
+            reputationLevelFill.fillAmount = (float) GameController.Instance.GetReputationLevel() / 100;
 
-        int currentReputation = GameController.Instance.GetReputationLevel();
+            int currentReputation = GameController.Instance.GetReputationLevel();
 
-        if(currentReputation > 80)
-        {
-            reputationLevelImage.sprite = reputationStateSprites[3];
-            reputationLevelFill.color = Color.cyan;
-        }
-        else if(currentReputation > 65)
-        {
-            reputationLevelImage.sprite = reputationStateSprites[2];
-            reputationLevelFill.color = Color.green;
-        }
-        else if(currentReputation > 50)
-        {
-            reputationLevelImage.sprite = reputationStateSprites[1];
-        }
-        else
-        {
-            reputationLevelImage.sprite = reputationStateSprites[0];
-
-            if(currentReputation > 35)
+            if(currentReputation > 80)
             {
-                reputationLevelFill.color = Color.yellow;
+                reputationLevelImage.sprite = reputationStateSprites[3];
+                reputationLevelFill.color = Color.cyan;
+            }
+            else if(currentReputation > 65)
+            {
+                reputationLevelImage.sprite = reputationStateSprites[2];
+                reputationLevelFill.color = Color.green;
+            }
+            else if(currentReputation > 50)
+            {
+                reputationLevelImage.sprite = reputationStateSprites[1];
             }
             else
             {
-                reputationLevelFill.color = Color.red;
+                reputationLevelImage.sprite = reputationStateSprites[0];
+
+                if(currentReputation > 35)
+                {
+                    reputationLevelFill.color = Color.yellow;
+                }
+                else
+                {
+                    reputationLevelFill.color = Color.red;
+                }
+            }
+
+            ReputationStarAudio(currentReputation);
+        }
+    }
+
+    private void ReputationStarAudio(int reputation)
+    {
+        if(previousReputation < reputation)
+        {
+            if(reputation == 55 || reputation == 70 || reputation == 85)
+            {
+                reputationStarSource.PlayOneShot(addReputationClip);
             }
         }
+        else
+        {
+            if(reputation == 50 || reputation == 65 || reputation == 80)
+            {
+                reputationStarSource.PlayOneShot(subtractReputationClip);
+            }
+        }
+
+        previousReputation = reputation;
     }
 
     private void CrowdDelayUI(float fillAmount)
@@ -211,6 +238,7 @@ public class UIManager : MonoBehaviour
     private void AddBonusTimeUI()
     {
         addedBonusUI.gameObject.SetActive(true);
+        stopWatchFill.color = Color.green;
         DeactivateCenterPoint();
         StartCoroutine(AddBonusTimeManage());
     }

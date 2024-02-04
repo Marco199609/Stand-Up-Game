@@ -156,8 +156,8 @@ public class JokeManager : MonoBehaviour
             else if(i == 1 || i == 3)
             {
                 var j = Random.Range(0, badJokeList.Count);
-                currentJokeList.Add(badJokeList[i]);
-                badJokeList.Remove(badJokeList[i]);
+                currentJokeList.Add(badJokeList[j]);
+                badJokeList.Remove(badJokeList[j]);
             }
             else
             {

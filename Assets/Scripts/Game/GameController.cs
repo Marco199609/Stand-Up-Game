@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     #endregion
 
+    [SerializeField] private int reputationDifference = 5;
     [SerializeField] private float specialUISetDelay = 3;
     [SerializeField] private int turnDurationInSeconds = 90;
     [SerializeField] private float jokeResponseDelayInSeconds = 2;
@@ -40,7 +41,7 @@ public class GameController : MonoBehaviour
     [SerializeField, TextArea] private string normalEndingText;
     [SerializeField, TextArea] private string badEndingText;
 
-
+    public bool IsBonusTime {get; private set;}
     private bool inGame;
     private float transparencyLerpProgress;
 
@@ -203,26 +204,32 @@ public class GameController : MonoBehaviour
         turnDurationInSeconds -= seconds;
     }
 
-    public void AddReputationLevel(int amount)
+    public void AddReputationLevel()
     {
-        reputationLevel += amount;
-        reputationLevel = Mathf.Clamp(reputationLevel, 0, 100);
-
-        if(reputationLevel >= 100)
+        if(!IsBonusTime)
         {
-            AddSecondsToTurn(bonusDuration);
-            OnAddBonusTime();
-            reputationLevel = 50;
-        }
+            reputationLevel += reputationDifference;
+            reputationLevel = Mathf.Clamp(reputationLevel, 0, 100);
 
-        OnModifyReputationLevel();
+            if(reputationLevel >= 100)
+            {
+                AddSecondsToTurn(bonusDuration);
+                OnAddBonusTime();
+                IsBonusTime = true;
+            }
+
+            OnModifyReputationLevel();
+        }
     }
 
-        public void SubtractReputationLevel(int amount)
+    public void SubtractReputationLevel()
     {
-        reputationLevel -= amount;
-        reputationLevel = Mathf.Clamp(reputationLevel, 0, 100);
-        OnModifyReputationLevel();
+        if(!IsBonusTime)
+        {
+            reputationLevel -= reputationDifference;
+            reputationLevel = Mathf.Clamp(reputationLevel, 0, 100);
+            OnModifyReputationLevel();
+        }
     }
 
     public float GetTurnTimeLeft()

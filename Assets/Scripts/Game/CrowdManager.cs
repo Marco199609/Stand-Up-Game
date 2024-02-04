@@ -70,7 +70,7 @@ public class CrowdManager : MonoBehaviour
 
         jokeAudioSource.PlayOneShot(cheeringClip, 0.6f);
 
-        GameController.Instance.AddReputationLevel(5);
+        GameController.Instance.AddReputationLevel();
     }
     private void BadJokeResponse()
     {
@@ -82,7 +82,7 @@ public class CrowdManager : MonoBehaviour
         jokeAudioSource.PlayOneShot(booingClip, 0.2f);
         baDumTssAudioSource.Play();
         
-        GameController.Instance.SubtractReputationLevel(10);
+        GameController.Instance.SubtractReputationLevel();
     }
 
     private void SetAnimationDelay(Animator animator, string trigger1, string trigger2, float maxDelayInSeconds = 1, float firstTriggerProbability = 0.5f)

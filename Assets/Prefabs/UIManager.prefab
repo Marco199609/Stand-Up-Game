@@ -2532,6 +2532,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   timeText: {fileID: 351899960236128857}
+  reputationStarSource: {fileID: 0}
+  addReputationClip: {fileID: 8300000, guid: 6818ed61b4c33678a896a2669171c1ec, type: 3}
+  subtractReputationClip: {fileID: 8300000, guid: 08bb32b1e7343ef879d94c828b8edb58, type: 3}
 --- !u!1 &7241460230468071399
 GameObject:
   m_ObjectHideFlags: 0
@@ -3163,7 +3166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!82 &263823934 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 567705426171801960, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
+  m_PrefabInstance: {fileID: 4844019623988785209}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &356123453 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1272755452119487673, guid: caee0133399647d0e9656bf09a6d4d9e, type: 3}
@@ -938,14 +943,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3492337358809600904, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
-      propertyPath: m_Color.b
-      value: 0.015686275
-      objectReference: {fileID: 0}
-    - target: {fileID: 3492337358809600904, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
-      propertyPath: m_Color.g
-      value: 0.92156863
-      objectReference: {fileID: 0}
+    - target: {fileID: 3166108995963579252, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+      propertyPath: reputationStarSource
+      value: 
+      objectReference: {fileID: 263823934}
     - target: {fileID: 5168076792835070955, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -953,10 +954,6 @@ PrefabInstance:
     - target: {fileID: 7012451419389843784, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
       propertyPath: m_Name
       value: UIManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7012451419389843784, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8862780884326590700, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
