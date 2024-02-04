@@ -239,8 +239,6 @@ public class UIManager : MonoBehaviour
 
             var animatedPercent = dontHesitateUICurve.Evaluate(percent);
 
-            Debug.Log(percent);
-
             starImage.transform.localScale = Vector3.Slerp(Vector3.one, targetScale, percent);
             starImage.color = new Color(1, 1, 1, animatedPercent);
 
