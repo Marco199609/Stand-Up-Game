@@ -70,6 +70,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dontHesitateText;
     [SerializeField] private AnimationCurve dontHesitateUICurve; 
     [SerializeField] private AnimationCurve bonusTextCurve;
+    [SerializeField] private TextMeshProUGUI timeText;
 
     private float dontHesitateDelayTime = 8;
     private float dontHesistateCurrentTime;
@@ -94,6 +95,7 @@ public class UIManager : MonoBehaviour
     private void ShowCountdownUI(int timeRemaining)
     {
         stopWatchFill.fillAmount = 1 - ((float) timeRemaining / 120);
+        timeText.text = timeRemaining.ToString();
     }
 
     private void ShowJokeUI(string joke)
