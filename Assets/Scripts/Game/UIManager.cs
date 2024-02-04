@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
 
     private void ShowCountdownUI(int timeRemaining)
     {
-        stopWatchFill.fillAmount = 1 - ((float) timeRemaining / 90);
+        stopWatchFill.fillAmount = 1 - ((float) timeRemaining / 120);
     }
 
     private void ShowJokeUI(string joke)
@@ -227,6 +227,7 @@ public class UIManager : MonoBehaviour
     private void ActivateDontHesitateUI()
     {
         dontHesistateCurrentTime = dontHesitateDelayTime;
+        dontHesitateProgress = 0;
         isHesitating = true;
         StartCoroutine(DontHesitatUIManage());
     }
@@ -247,11 +248,11 @@ public class UIManager : MonoBehaviour
             {
                 dontHesitateText.gameObject.SetActive(true);
 
-                var percent = Interpolation.Smooth(dontHesitateUITime, ref dontHesitateProgress);
+                var percent = Interpolation.Linear(dontHesitateUITime, ref dontHesitateProgress);
 
                 if(percent >= 1) dontHesitateProgress = 0;
 
-                var animatedPercent = bonusTextCurve.Evaluate(percent);
+                var animatedPercent = dontHesitateUICurve.Evaluate(percent);
 
                 dontHesitateText.transform.localScale = Vector3.Slerp(Vector3.one, targetScale, animatedPercent);
                 dontHesitateText.color = new Color(1, 1, 1, animatedPercent);

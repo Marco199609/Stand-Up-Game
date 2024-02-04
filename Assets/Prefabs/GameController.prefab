@@ -547,7 +547,7 @@ MonoBehaviour:
   jokeManager: {fileID: 2536207555503804620}
   uiManager: {fileID: 0}
   specialUISetDelay: 3
-  turnDurationInSeconds: 90
+  turnDurationInSeconds: 120
   jokeResponseDelayInSeconds: 2
   reputationLevel: 50
   bonusDuration: 15
@@ -559,8 +559,8 @@ MonoBehaviour:
     for a place to spend the night. The only possession you cling to is a handful
     of jokes scavenged from Reddit. After a few hours of aimless wandering through
     the city, you manage to convince someone to give you a shot at a small gig in
-    a local bar. With just 90 seconds on the stage, you aim to test your skills and,
-    hopefully, pocket some cash for the night."
+    a local bar. With just two minutes on the stage, you aim to test your skills
+    and, hopefully, pocket some cash for the night."
   goodEndingText: You delivered an outstanding performance! In a stroke of luck,
     a significant figure was present during that pivotal moment, and you soon secured
     funding for your inaugural tour. Now, armed with support, you continue on your
