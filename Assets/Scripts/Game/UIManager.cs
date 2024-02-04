@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using SnowHorse.Utils;
-using Unity.VisualScripting;
+using System.Net.Sockets;
 
 public class UIManager : MonoBehaviour
 {
@@ -63,6 +63,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image reputationLevelImage;
     [SerializeField] private Sprite[] reputationStateSprites;
     [SerializeField] private Image reputationLevelFill;
+    [SerializeField] private Image[] reputationCenterStars;
     [SerializeField] private GameObject uiContainer;
     [SerializeField] private GameObject pagePrompts;
     [SerializeField] private RectTransform addedBonusUI;
@@ -77,9 +78,12 @@ public class UIManager : MonoBehaviour
     private float dontHesitateDelayTime = 8;
     private float dontHesistateCurrentTime;
     private float dontHesitateUITime = 1f;
+
+    private float reputationStarsUITime = 0.5f;
     
-    private float dontHesitateProgress;
+    private float dontHesitateLerpProgress;
     private float addedBonusUILerpProgress;
+    private float reputationStarsLerpProgress;
     private int previousReputation;
     private bool isHesitating;
 
@@ -187,8 +191,24 @@ public class UIManager : MonoBehaviour
     {
         if(previousReputation < reputation)
         {
-            if(reputation == 55 || reputation == 70 || reputation == 85)
+            if(reputation == 55 || reputation == 70 || reputation == 85 || reputation >= 100)
             {
+                if(reputation == 55)
+                {
+                    reputationStarSource.pitch = 1;
+                    StartCoroutine(DisplayReputationCenterStars(reputationCenterStars[0]));
+                }
+                else if(reputation == 70)
+                {
+                    reputationStarSource.pitch = 1.05f;
+                    StartCoroutine(DisplayReputationCenterStars(reputationCenterStars[1]));
+                }
+                else if(reputation == 85)
+                {
+                    reputationStarSource.pitch = 1.08f;
+                    StartCoroutine(DisplayReputationCenterStars(reputationCenterStars[2]));
+                }
+
                 reputationStarSource.PlayOneShot(addReputationClip);
             }
         }
@@ -196,11 +216,40 @@ public class UIManager : MonoBehaviour
         {
             if(reputation == 50 || reputation == 65 || reputation == 80)
             {
+                reputationStarSource.pitch = 1;
                 reputationStarSource.PlayOneShot(subtractReputationClip);
             }
         }
 
         previousReputation = reputation;
+    }
+
+    private IEnumerator DisplayReputationCenterStars(Image starImage)
+    {
+        Vector3 targetScale = Vector3.one * 2f;
+
+        starImage.transform.localScale = Vector3.one;
+        starImage.gameObject.SetActive(true);
+
+        float percent = 0;
+
+        while(percent < 1)
+        {
+            percent = Interpolation.Linear(reputationStarsUITime, ref reputationStarsLerpProgress);
+
+            var animatedPercent = dontHesitateUICurve.Evaluate(percent);
+
+            Debug.Log(percent);
+
+            starImage.transform.localScale = Vector3.Slerp(Vector3.one, targetScale, percent);
+            starImage.color = new Color(1, 1, 1, animatedPercent);
+
+            dontHesistateCurrentTime -= 0.01f;
+            yield return new WaitForSecondsRealtime(0.01f);
+        }
+
+        starImage.gameObject.SetActive(false);
+        reputationStarsLerpProgress = 0;
     }
 
     private void CrowdDelayUI(float fillAmount)
@@ -238,6 +287,10 @@ public class UIManager : MonoBehaviour
     private void AddBonusTimeUI()
     {
         addedBonusUI.gameObject.SetActive(true);
+
+        reputationStarSource.pitch = 1.10f;
+        reputationStarSource.PlayOneShot(addReputationClip);
+        
         stopWatchFill.color = Color.green;
         DeactivateCenterPoint();
         StartCoroutine(AddBonusTimeManage());
@@ -268,7 +321,7 @@ public class UIManager : MonoBehaviour
     private void ActivateDontHesitateUI()
     {
         dontHesistateCurrentTime = dontHesitateDelayTime;
-        dontHesitateProgress = 0;
+        dontHesitateLerpProgress = 0;
         isHesitating = true;
         StartCoroutine(DontHesitatUIManage());
     }
@@ -289,9 +342,9 @@ public class UIManager : MonoBehaviour
             {
                 dontHesitateText.gameObject.SetActive(true);
 
-                var percent = Interpolation.Linear(dontHesitateUITime, ref dontHesitateProgress);
+                var percent = Interpolation.Linear(dontHesitateUITime, ref dontHesitateLerpProgress);
 
-                if(percent >= 1) dontHesitateProgress = 0;
+                if(percent >= 1) dontHesitateLerpProgress = 0;
 
                 var animatedPercent = dontHesitateUICurve.Evaluate(percent);
 
