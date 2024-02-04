@@ -1,5 +1,8 @@
 using UnityEngine;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using UnityEditor.VersionControl;
+using System.Threading.Tasks;
 
 public class JokeManager : MonoBehaviour
 {
@@ -46,6 +49,11 @@ public class JokeManager : MonoBehaviour
 
     public static JokeManager Instance;
 
+    private List<Joke> goodJokeList;
+    private List<Joke> badJokeList;
+    private List<Joke> usedJokesList;
+
+
     private JokePage visualizedPage;
     private JokePage selectedJokePage;
     private JokeData currentJoke;
@@ -66,6 +74,7 @@ public class JokeManager : MonoBehaviour
     {
         jokeList = JsonConvert.DeserializeObject<JokeListObject>(json.text);
 
+        ClassifyJokes();
         ShuffleJokes();
     }
 
@@ -114,12 +123,54 @@ public class JokeManager : MonoBehaviour
         }
     }
 
+    private void ClassifyJokes()
+    {
+        goodJokeList = new List<Joke>();
+        badJokeList = new List<Joke>();
+
+        foreach (Joke joke in jokeList.JokeList)
+        {
+            if(joke.JokeQuality == JokeQuality.GoodJoke) goodJokeList.Add(joke);
+            else badJokeList.Add(joke);
+        }
+    }
+
     private void ShuffleJokes()
     {
+        if(goodJokeList.Count < 2 || badJokeList.Count < 2)
+        {
+            ClassifyJokes();
+        }
+
+        var currentJokeList = new List<Joke>();
+
+        for(int i = 0; i < 4; i++)
+        {
+            if(i == 0 || i == 2)
+            {
+                var j = Random.Range(0, goodJokeList.Count);
+
+                currentJokeList.Add(goodJokeList[j]);
+                goodJokeList.Remove(goodJokeList[j]);
+            }
+            else if(i == 1 || i == 3)
+            {
+                var j = Random.Range(0, badJokeList.Count);
+                currentJokeList.Add(badJokeList[i]);
+                badJokeList.Remove(badJokeList[i]);
+            }
+            else
+            {
+                Debug.Log("Creating current list incorrectly! Check joke manager.");
+            }
+        }
+
         foreach(JokePage jokePage in jokePages)
         {
-            var i = Random.Range(0, jokeList.JokeList.Count);
-            jokePage.SetJoke(jokeList.JokeList[i]);
+            var i = Random.Range(0, currentJokeList.Count);
+            jokePage.SetJoke(currentJokeList[i]);
+
+            currentJokeList.Remove(currentJokeList[i]);
         }
     }
     private void SelectJoke()

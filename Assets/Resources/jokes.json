@@ -1,7 +1,175 @@
 {
     "joke_list": [
         {
-            "joke": "A blind man walks into a bar. And a table. And a chair. ",
+            "joke": "A blind man walks into a bar. And a table. And a chair.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "You'll never guess who I bumped into on the way to the opticians! Everyone.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What do you get when you mix human DNA with goat DNA? Kicked out of the petting zoo.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Did I tell you about my new job at the circus? My job is to circumcise the elephants. The pay isn't great, but the tips are enormous.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What's better than winning the silver medal at the Paralympics? Having legs.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Two fish in a tank, one says to the other; 'You man the guns, I'll drive!'",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Why do you never see hippos hiding in trees? Because they're very good at it.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Why did the half-blind man fall into a well? He couldn't see that well.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Why doesn't blind people clean up after their guide dogs' mess? Because they can't see shit.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "My dad asked me the other day: 'Are you even listening to me?' Which is a really weird way to start a conversation if you ask me.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "I stand corrected, said the man in the orthopedic shoes.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "My dog is a rescue, which is a really self-righteous way of saying I bought a used dog.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "I love telling jokes about the Titanic; they always go down well. A great way to break the ice.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "2 fish in a tank; one turns to the other and says: 'do you know how to drive this thing'?",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Why do flamingos stand on one leg? Because if they lifted both, they'd fall over.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "My grandfather has the heart of a lion and a lifetime ban from the zoo.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "I want to die peacefully in my sleep like my grandfather did, not screaming in terror like the passengers in his car.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "A snake walks into a bar, and the bartender asks: 'how?'",
+            "joke_quality": 0
+        },
+        {
+            "joke": "If life gives you lemons, make lemonade. If life gives you melons, you might be dyslexic.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What do you call a dog with no legs? You don't call it, you go get it.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "My wife comes to me and says 'Honey, I don't understand the concept of human cloning.' I said 'That makes two of us.'",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What do you call an indecisive bee? A maybee.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What do you call an American bee? A USB.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What did the blind carpenter say when he picked up sandpaper? What the heck did I just read!",
+            "joke_quality": 0
+        },
+        {
+            "joke": "How many therapists does it take to change a light bulb? One - but the light bulb has to want to change.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Why is there no pregnant Barbie? Because Ken came in another box.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What were Michael Jackson's pronouns? He/he.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Why can't you trust atoms? They make up everything.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Why don't kleptomaniacs understand metaphors? They always take things, literally.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Did you hear about the scarecrow that won the Nobel Prize? He was outstanding in his field!",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Why did the skeleton go to a movie by himself? Because he had no body to go with.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Why does Santa have such a big sack? Because he only comes once a year.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What do you call a fly with no wings? A walk.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Those of you who believe in telekinesis, raise my hand.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "Two cannibals side by side eating a clown. One looks at the other and says 'does this taste funny to you?'",
+            "joke_quality": 0
+        },
+        {
+            "joke": "\"Your honor. If we are what we eat, then my client is an innocent man\"",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What do Winnie The Pooh and Jack The Ripper have in common? They got the same middle name.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What's the difference between in-laws and outlaws? Outlaws are wanted.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What's a 3-letter word that starts with gas? Car.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What did the Jedi say to the cowboy? Use the horse.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What does a deaf gynecologist do? He reads lips.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "What's Mozart up to these days? Decomposing.",
+            "joke_quality": 0
+        },
+        {
+            "joke": "How close was Anakin to the lava? About two feet away.",
             "joke_quality": 0
         },
         {
@@ -9,73 +177,172 @@
             "joke_quality": 1
         },
         {
-            "joke": "Velcro. What a ripoff.",
-            "joke_quality": 0
-        },
-        {
-            "joke": "What do you call a black guy flying a plane? A pilot, you f-----g racist.",
-            "joke_quality": 0
-        },
-        {
-            "joke": "The bartender says, \"We don't serve time travelers here.\" A time traveler walks into a bar.",
-            "joke_quality": 0
-        },
-        {
-            "joke": "What do you call an alligator in a vest? An Investigator.",
-            "joke_quality": 0
-        },
-        {
-            "joke": "Schrodinger's cat walks into a bar. And doesn't.",
+            "joke": "What's brown and sticky? A stick.",
             "joke_quality": 1
         },
         {
-            "joke": "I never make mistakes. I thought I did once; but I was wrong.",
+            "joke": "What do you call a boomerang that won't come back? A stick.",
             "joke_quality": 1
         },
         {
-            "joke": "What did the fish say when he hit the wall? Dam.",
+            "joke": "What's red and smells like blue paint? Red paint.",
             "joke_quality": 1
         },
         {
-            "joke": "Why are pirates called pirates? 'cause they arrr!",
+            "joke": "What's the difference between swine flu and bird flu? Bird flu requires tweetment, and swine flu requires oinkment!",
             "joke_quality": 1
         },
         {
-            "joke": "A dyslexic man walks in to a bra.",
-            "joke_quality": 0
-        },
-        {
-            "joke": "How many tickles does it take to get an octopus to laugh? Ten-tickles!",
+            "joke": "How do you think the unthinkable? With an iceberg.",
             "joke_quality": 1
         },
         {
-            "joke": "What is a fake spaghetti strand? An impasta!",
+            "joke": "Why do scuba divers fall backward out of the boat? Because if they fell forwards, they'd still be in the boat.",
             "joke_quality": 1
         },
         {
-            "joke": "How do you know if someone's a vegan? They'll tell you.",
-            "joke_quality": 0
-        },
-        {
-            "joke": "Plato and a Platypus walk into a bar. The bartender looks up and says: \"What is this, a joke?\"",
+            "joke": "The Buddha walks up to a hotdog stand and says: 'make me one with everything.'",
             "joke_quality": 1
         },
         {
-            "joke": "A duck walks into a drugstore. He says \"give me some chapstick... put it on my bill\" ",
-            "joke_quality": 0
-        },
-        {
-            "joke": "What do you call a boomerang that doesn't come back? A stick.",
+            "joke": "I took the shell off my racing snail to make it go faster. If anything, it just made it more sluggish.",
             "joke_quality": 1
         },
         {
-            "joke": "Why can't a bike stand on its own? It's two tired.",
-            "joke_quality": 0
+            "joke": "What's a foot long and slippery? A slipper.",
+            "joke_quality": 1
         },
         {
-            "joke": "Where do potatoes go when they die? To the gravy.",
+            "joke": "Why do Norwegian warships have a barcode on the side of them? So that they can Scandinavian.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "Where did Napoleon keep his armies? In his sleevies.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "Where does a pirate keep his buccaneers? Under his buccan-hat.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What has four letters, sometimes has nine, and never has five.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "A sheep, a drum, and a snake fall off a cliff. Bah-dum-tss.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "Why don't skeletons fight each other? They don't have the guts!",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What's blue but not very heavy? Light blue.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What did one snowman say to the other snowman? 'Do you smell carrots?'",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What do you call a magical dog? A Labracadabrador.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What is the best time to go to the dentist? Tooth hurty.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "When a Norwegian robot analyzes a bird, it Scandinavian.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What's red and bad for your teeth? A brick.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What kind of bees make milk? Boobees.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "I believe a good pun is its own reword.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "How tall is a spider? 8 feet.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "I know a really great knock-knock joke, but someone else has to start it",
+            "joke_quality": 1
+        },
+        {
+            "joke": "I used to wear a necklace with me and my lover in it, but they left me. Now I'm independent.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What do you call a four-eyed pig? Piiiig.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What do you call a fish with no eyes? A fsh.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "Why don't ants ever get sick? Because of their little antibodies.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "Do you know what's not right? Left.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What goes down but doesn't come up? A yo.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "If a sentence only contains a dependent clause.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "Knock knock! Who's there? Spell! Spell who? W-H-O.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What did the buffalo say when his son went to college? Bison.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What did the Indian kid say to his mother when he left for his first day of school? Mumbai.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "How do you make an egg roll? You push it.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "Why did Adele cross the road? To say hello from the other side.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What did the pirate say when he turned 80? Ayyee Matey!",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What do you call a person who steals all your toenail clippings? A cliptoemaniac.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "I used to hate facial hair, but it grew on me.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "What do you call a sleepwalking nun? A roamin' Catholic.",
+            "joke_quality": 1
+        },
+        {
+            "joke": "Why did the stadium get hot? All the fans left.",
             "joke_quality": 1
         }
     ]
 }
-
