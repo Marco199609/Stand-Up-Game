@@ -240,7 +240,7 @@ public class UIManager : MonoBehaviour
             var animatedPercent = dontHesitateUICurve.Evaluate(percent);
 
             starImage.transform.localScale = Vector3.Slerp(Vector3.one, targetScale, percent);
-            starImage.color = new Color(1, 1, 1, animatedPercent);
+            starImage.color = new Color(1, 1, 1, animatedPercent - 0.5f);
 
             dontHesistateCurrentTime -= 0.01f;
             yield return new WaitForSecondsRealtime(0.01f);

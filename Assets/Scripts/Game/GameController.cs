@@ -155,7 +155,7 @@ public class GameController : MonoBehaviour
 
     public void Quit()
     {
-        Application.Quit();
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void Update()
@@ -173,7 +173,7 @@ public class GameController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            SceneManager.LoadScene("MainMenu");
         }
     }
 

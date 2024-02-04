@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SnowHorse.unity
     guid: 1ce7f8102f9c90f42b251308c34fedf8
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 206c7eb8405478b92bd2085cec861feb
+  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
