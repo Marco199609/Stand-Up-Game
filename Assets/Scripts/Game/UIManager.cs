@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections;
 using SnowHorse.Utils;
 using System.Net.Sockets;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -56,6 +57,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Image stopWatchFill;
     [SerializeField] private Image crowdStopwatchFill;
+    [SerializeField] private Image blackCircle;
     [SerializeField] private GameObject crowdStopwatchObject;
     [SerializeField] private TextMeshProUGUI jokeText;
     [SerializeField] private GameObject tellJokeToCrowdUI;
@@ -84,6 +86,7 @@ public class UIManager : MonoBehaviour
     private float dontHesitateLerpProgress;
     private float addedBonusUILerpProgress;
     private float reputationStarsLerpProgress;
+    private float blackCircleLerpProgress;
     private int previousReputation;
     private bool isHesitating;
 
@@ -96,6 +99,31 @@ public class UIManager : MonoBehaviour
         crowdStopwatchObject.SetActive(false);
         addedBonusUI.gameObject.SetActive(false);
         jokeText.gameObject.SetActive(true);
+        StartCoroutine(AnimateBlackCircle());
+    }
+
+    private IEnumerator AnimateBlackCircle()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        Vector3 initialScale = blackCircle.transform.localScale;
+        Vector3 targetScale = Vector3.zero;
+
+
+        while (blackCircle.transform.localScale != targetScale)
+        {
+            var percent = Interpolation.Linear(1.5f, ref blackCircleLerpProgress);
+
+            blackCircle.transform.localScale = Vector3.Lerp(initialScale, targetScale, percent);
+
+            yield return null;
+        }
+
+        blackCircle.gameObject.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void ShowCountdownUI(int timeRemaining)

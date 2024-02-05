@@ -30,7 +30,7 @@ public class MainMenuManager : MonoBehaviour
         Vector3 initialScale = blackScreen.transform.localScale;
         Vector3 targetScale = Vector3.one * 100;
 
-        while(blackScreen.transform.localScale != Vector3.one * 100)
+        while(blackScreen.transform.localScale != targetScale)
         {
             var percent = Interpolation.Linear(1.5f, ref blackScreenLerpProgress);
 
