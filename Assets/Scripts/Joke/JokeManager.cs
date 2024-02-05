@@ -1,8 +1,7 @@
 using UnityEngine;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using UnityEditor.VersionControl;
-using System.Threading.Tasks;
+using System.Collections;
 
 public class JokeManager : MonoBehaviour
 {
@@ -51,8 +50,6 @@ public class JokeManager : MonoBehaviour
 
     private List<Joke> goodJokeList;
     private List<Joke> badJokeList;
-    private List<Joke> usedJokesList;
-
 
     private JokePage visualizedPage;
     private JokePage selectedJokePage;
@@ -211,7 +208,10 @@ public class JokeManager : MonoBehaviour
     {
         if(visualizedPage != null && visualizedPage != jokePage)
         {
-            visualizedPage.ResetModelPosition();
+            while(visualizedPage.CanMoveModel)
+            {
+                visualizedPage.ResetModelPosition();
+            }
         }
 
         if(jokePage != null)

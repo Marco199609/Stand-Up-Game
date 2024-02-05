@@ -12,13 +12,13 @@ public class JokePage : MonoBehaviour
     [field: SerializeField] public TextMeshProUGUI pageText;
     
 
-    private float lerpDelay = 0.3f;
+    private float lerpDelay = 0.2f;
     private Vector3 initialPosition;
     private Vector3 initialScale;
     private Quaternion initialRotation;
     private float lerpProgress;
     private float visualizationLerpProgress;
-    private bool canMoveModel;
+    public bool CanMoveModel { get; private set; }
 
     private Coroutine goToViewingPosition;
     private Coroutine goToInitialPosition;
@@ -56,19 +56,19 @@ public class JokePage : MonoBehaviour
     }
     public void ModelGoToVisualizationPosition()
     {
-        if(!canMoveModel)
+        if(!CanMoveModel)
         {
             if(resetModelPosition != null) StopCoroutine(resetModelPosition);
-            modelGoToVisualizationPosition = StartCoroutine(ModelGoToVisualizedPos(targetPos: new Vector3(0, 0.15f, 0), delay: 0.4f, canMoveModel: true));
+            modelGoToVisualizationPosition = StartCoroutine(ModelGoToVisualizedPos(targetPos: new Vector3(0, 0.15f, 0), delay: 0.15f, canMoveModel: true));
         }
     }
 
     public void ResetModelPosition()
     {
-        if(canMoveModel)
+        if(CanMoveModel)
         {
             if(modelGoToVisualizationPosition != null) StopCoroutine(modelGoToVisualizationPosition);
-            resetModelPosition = StartCoroutine(ModelGoToVisualizedPos(targetPos: Vector3.zero, delay: 0.4f, canMoveModel: false));
+            resetModelPosition = StartCoroutine(ModelGoToVisualizedPos(targetPos: Vector3.zero, delay: 0.1f, canMoveModel: false));
         }
     }
     public bool IsPageReady(Transform pageHolder)
@@ -78,6 +78,7 @@ public class JokePage : MonoBehaviour
 
     IEnumerator ModelGoToVisualizedPos(Vector3 targetPos, float delay, bool canMoveModel)
     {
+        this.CanMoveModel = canMoveModel;
         visualizationLerpProgress = 0;
         Vector3 initialPos = pageModel.transform.localPosition;
 
@@ -88,8 +89,6 @@ public class JokePage : MonoBehaviour
             pageModel.transform.localPosition = Vector3.Lerp(initialPos, targetPos, percent);
             yield return new WaitForEndOfFrame();
         }
-
-        this.canMoveModel = canMoveModel;
     }
 
     IEnumerator GoToViewJokePos(Transform pageHolder)
