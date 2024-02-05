@@ -23,6 +23,9 @@ public class MainMenuManager : MonoBehaviour
 
     private IEnumerator GameStart()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         blackScreen.SetActive(true);
 
         Vector3 initialScale = blackScreen.transform.localScale;
@@ -37,8 +40,6 @@ public class MainMenuManager : MonoBehaviour
             yield return null;
         }
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         audioSource.Stop();
         SceneManager.LoadScene("Level1");
     }
