@@ -29,6 +29,6 @@ public class SnowHorseLogo : MonoBehaviour
         yield return new WaitForSeconds(_delay);
         _videoPlayer.Play();
         yield return new WaitForSeconds((float) _videoClip.length);
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("MainMenu");
     }
 }

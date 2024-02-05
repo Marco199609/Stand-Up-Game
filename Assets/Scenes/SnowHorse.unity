@@ -262,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _delay: 0.5
   _videoPlayer: {fileID: 1945061763}
-  _videoClip: {fileID: 32900000, guid: 223b5c1e3d16fde4b8c42cb741132fa2, type: 3}
+  _videoClip: {fileID: 32900000, guid: 73201f5b59b9866eda73c2d5bfcfea6e, type: 3}
 --- !u!1 &1945061761
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +329,7 @@ VideoPlayer:
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
-  m_WaitForFirstFrame: 0
+  m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
 --- !u!82 &1945061764
