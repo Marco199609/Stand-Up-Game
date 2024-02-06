@@ -49,13 +49,12 @@ public class MainMenuManager : MonoBehaviour
         audioSource.Stop();
         SceneManager.LoadScene("Level1");
 
-        while(PlayerController.Instance == null)
+        while(GameController.Instance == null)
         {
             yield return null;
         }
 
-        PlayerController.Instance.VCamSensitivity = sensitivity;
-        PlayerController.Instance.ResetVirtualCam();
+        GameController.Instance.VCamSensitivity = sensitivity;
 
         Destroy(gameObject);
     }

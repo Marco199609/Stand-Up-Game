@@ -145,7 +145,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 7200628500148461950}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 456a8dd855de7640e844a42a7bdf8ad3, type: 3}
   m_Name: 
@@ -754,6 +754,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2536207555503804620, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2536207555503804620, guid: 740d830c5411da396ac69781a6843ab5, type: 3}
       propertyPath: pageHolder
       value: 
       objectReference: {fileID: 427936076}
@@ -934,6 +938,10 @@ PrefabInstance:
     - target: {fileID: 2063079744245769763, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166108995963579252, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3166108995963579252, guid: 4c113b0c9aabc8f7aa9213c45e310944, type: 3}
       propertyPath: reputationStarSource

@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
     [SerializeField, TextArea] private string badEndingText;
 
     public bool IsBonusTime {get; private set;}
+    public float VCamSensitivity = 1;
     private bool inGame;
     private float transparencyLerpProgress;
 
@@ -88,9 +89,10 @@ public class GameController : MonoBehaviour
 
         specialUIBackground.gameObject.SetActive(false);
         playerController.enabled = true;
-        jokeManager.enabled = true;
-        uiManager.enabled = true;
+        //jokeManager.enabled = true;
+        //uiManager.enabled = true;
 
+        PlayerController.Instance.VCamSensitivity = VCamSensitivity;
         playerController.ResetVirtualCam();
 
         countDownTurnDuration = StartCoroutine(CountDownTurnDuration());
