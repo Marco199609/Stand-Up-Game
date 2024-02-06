@@ -2,17 +2,22 @@ using System.Collections;
 using SnowHorse.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject blackScreen;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private Slider slider;
 
+    private float sensitivity = 1;
     private float blackScreenLerpProgress;
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        DontDestroyOnLoad(this);
     }
 
     public void StartGame()
@@ -24,6 +29,8 @@ public class MainMenuManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        sensitivity = slider.value;
 
         blackScreen.SetActive(true);
 
@@ -41,6 +48,16 @@ public class MainMenuManager : MonoBehaviour
 
         audioSource.Stop();
         SceneManager.LoadScene("Level1");
+
+        while(PlayerController.Instance == null)
+        {
+            yield return null;
+        }
+
+        PlayerController.Instance.VCamSensitivity = sensitivity;
+        PlayerController.Instance.ResetVirtualCam();
+
+        Destroy(gameObject);
     }
 
     public void ExitGame()

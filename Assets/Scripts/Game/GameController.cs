@@ -49,12 +49,6 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 0;
-        QualitySettings.vSyncCount = 0;
-
-        //Cursor.lockState = CursorLockMode.None;
-        //Cursor.visible = true;
-
         if (Instance == null)
         {
             Instance = this;

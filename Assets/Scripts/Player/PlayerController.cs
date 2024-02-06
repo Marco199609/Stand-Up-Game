@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 #endregion
 
     [SerializeField] private CinemachineVirtualCamera virtualCam;
+
+    public float VCamSensitivity = 1;
     public Collider currentVisualizedObject { get; private set; }
     public static PlayerController Instance;
 
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour
     private RaycastHit hit;
     private float defaultPOVSpeed = 700f;
     private float defaultPOVDecelTime = 0.05f;
+    
 
     private void Awake()
     {
@@ -119,8 +122,8 @@ public class PlayerController : MonoBehaviour
 
     private void SetVCam(float maxSpeed, float decelTime)
     {
-        vcPOV.m_HorizontalAxis.m_MaxSpeed = maxSpeed;
-        vcPOV.m_VerticalAxis.m_MaxSpeed = maxSpeed;
+        vcPOV.m_HorizontalAxis.m_MaxSpeed = maxSpeed * VCamSensitivity;
+        vcPOV.m_VerticalAxis.m_MaxSpeed = maxSpeed * VCamSensitivity;
 
         vcPOV.m_HorizontalAxis.m_DecelTime = decelTime;
         vcPOV.m_VerticalAxis.m_DecelTime = decelTime;
