@@ -122,6 +122,11 @@ public class PlayerController : MonoBehaviour
 
     private void SetVCam(float maxSpeed, float decelTime)
     {
+        if(GameSettings.Instance != null)
+        {
+            VCamSensitivity = GameSettings.Instance.VCamSensitivity;
+        }
+
         vcPOV.m_HorizontalAxis.m_MaxSpeed = maxSpeed * VCamSensitivity;
         vcPOV.m_VerticalAxis.m_MaxSpeed = maxSpeed * VCamSensitivity;
 

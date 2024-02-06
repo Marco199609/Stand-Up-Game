@@ -10,7 +10,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private Slider slider;
 
-    private float sensitivity = 1;
     private float blackScreenLerpProgress;
     private void Awake()
     {
@@ -30,7 +29,7 @@ public class MainMenuManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        sensitivity = slider.value;
+        GameSettings.Instance.VCamSensitivity = slider.value;
 
         blackScreen.SetActive(true);
 
@@ -48,13 +47,6 @@ public class MainMenuManager : MonoBehaviour
 
         audioSource.Stop();
         SceneManager.LoadScene("Level1");
-
-        while(GameController.Instance == null)
-        {
-            yield return null;
-        }
-
-        GameController.Instance.VCamSensitivity = sensitivity;
 
         Destroy(gameObject);
     }

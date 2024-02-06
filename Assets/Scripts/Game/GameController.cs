@@ -89,10 +89,7 @@ public class GameController : MonoBehaviour
 
         specialUIBackground.gameObject.SetActive(false);
         playerController.enabled = true;
-        //jokeManager.enabled = true;
-        //uiManager.enabled = true;
 
-        PlayerController.Instance.VCamSensitivity = VCamSensitivity;
         playerController.ResetVirtualCam();
 
         countDownTurnDuration = StartCoroutine(CountDownTurnDuration());
